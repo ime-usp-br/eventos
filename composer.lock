@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6b44fc8c37a817eceba4bd07159136d6",
+    "content-hash": "5a1220e57849f5fbcf79f9334fcf4a1a",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1543,16 +1543,16 @@
         },
         {
             "name": "laravel/serializable-closure",
-            "version": "v1.2.1",
+            "version": "v1.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/serializable-closure.git",
-                "reference": "d78fd36ba031a1a695ea5a406f29996948d7011b"
+                "reference": "47afb7fae28ed29057fdca37e16a84f90cc62fae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/serializable-closure/zipball/d78fd36ba031a1a695ea5a406f29996948d7011b",
-                "reference": "d78fd36ba031a1a695ea5a406f29996948d7011b",
+                "url": "https://api.github.com/repos/laravel/serializable-closure/zipball/47afb7fae28ed29057fdca37e16a84f90cc62fae",
+                "reference": "47afb7fae28ed29057fdca37e16a84f90cc62fae",
                 "shasum": ""
             },
             "require": {
@@ -1599,7 +1599,7 @@
                 "issues": "https://github.com/laravel/serializable-closure/issues",
                 "source": "https://github.com/laravel/serializable-closure"
             },
-            "time": "2022-08-26T15:25:27+00:00"
+            "time": "2022-09-08T13:45:54+00:00"
         },
         {
             "name": "laravel/socialite",
@@ -5889,6 +5889,55 @@
             "time": "2021-12-08T09:12:39+00:00"
         },
         {
+            "name": "uspdev/laravel-usp-theme",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ayrtonnotrya/laravel-usp-theme.git",
+                "reference": "bbbd4cb74eab3a2b1fa57cbc8da8fb683f132d7b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ayrtonnotrya/laravel-usp-theme/zipball/bbbd4cb74eab3a2b1fa57cbc8da8fb683f132d7b",
+                "reference": "bbbd4cb74eab3a2b1fa57cbc8da8fb683f132d7b",
+                "shasum": ""
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Uspdev\\UspTheme\\ServiceProvider"
+                    ],
+                    "aliases": {
+                        "UspTheme": "Uspdev\\UspTheme\\Facades\\UspTheme"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Uspdev\\UspTheme\\": "src"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Thiago Gomes Verissimo",
+                    "email": "thiago.verissimo@usp.br"
+                }
+            ],
+            "description": "usp theme for laravel",
+            "support": {
+                "source": "https://github.com/ayrtonnotrya/laravel-usp-theme/tree/master"
+            },
+            "time": "2022-08-31T17:57:29+00:00"
+        },
+        {
             "name": "uspdev/senhaunica-socialite",
             "version": "4.3.2",
             "source": {
@@ -8435,7 +8484,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "uspdev/laravel-usp-theme": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
