@@ -26,6 +26,16 @@
           <li>
               <a href="{{ route('home') }}">Página Inicial</a>
           </li>
+          @can("editar usuario")
+              <li>
+                  <a href="{{ route('users.index') }}">Usuários</a>
+                  <ul>
+                      <li>
+                          <a href="{{ route('users.loginas') }}">Logar Como</a>
+                      </li>
+                  </ul>
+              </li>
+          @endcan
           <li>
               <form style="padding:0px;" action="{{ route('logout') }}" method="POST" id="logout_form2">
                   @csrf
