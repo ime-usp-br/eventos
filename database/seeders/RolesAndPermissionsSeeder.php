@@ -18,6 +18,10 @@ class RolesAndPermissionsSeeder extends Seeder
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
 
         Permission::firstOrCreate(['name' => 'editar usuario']);
+        Permission::firstOrCreate(['name' => 'visualizar evento']);
+        Permission::firstOrCreate(['name' => 'criar evento']);
+        Permission::firstOrCreate(['name' => 'editar evento']);
+        Permission::firstOrCreate(['name' => 'deletar evento']);
 
         Role::firstOrCreate(['name' => 'Usuário']);
 

@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\AttachmentController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +23,7 @@ Route::get('/', function () {
 
 Route::get('/users/loginas', [UserController::class, 'loginas'])->name("users.loginas");
 Route::resource("users", UserController::class);
+
+Route::resource("events", EventController::class);
+
+Route::get("/attachment/download/{attachment}",[AttachmentController::class, "download"])->name("attachments.download");

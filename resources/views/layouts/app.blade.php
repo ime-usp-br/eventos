@@ -12,9 +12,14 @@
 
 @section('javascripts_bottom')
   @parent
-  <script>
-    $( "#menulateral" ).menu();
-  </script>
+    <script type="text/javascript">
+      let baseURL = "{{ env('APP_URL') }}";
+    </script>
+    <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
+    <script src="https://cdn.tiny.cloud/1/fluxyozlgidop2o9xx3484rluezjjiwtcodjylbuwavcfnjg/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        $( "#menulateral" ).menu();
+    </script>
 @endsection
 
 
@@ -36,6 +41,9 @@
                   </ul>
               </li>
           @endcan
+        <li>
+            <a href="{{ route('events.index') }}">Eventos</a>
+        </li>
           <li>
               <form style="padding:0px;" action="{{ route('logout') }}" method="POST" id="logout_form2">
                   @csrf
