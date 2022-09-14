@@ -14,4 +14,8 @@ class Modality extends Model
     ];
     
     public $timestamps = false;
+
+    protected $hidden = [
+        'id',
+    ];
 }

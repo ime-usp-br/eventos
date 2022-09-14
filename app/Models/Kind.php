@@ -14,4 +14,8 @@ class Kind extends Model
     ];
     
     public $timestamps = false;
+
+    protected $hidden = [
+        'id',
+    ];
 }

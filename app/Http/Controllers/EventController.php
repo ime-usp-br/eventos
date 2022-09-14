@@ -80,6 +80,9 @@ class EventController extends Controller
             $attachment->caminhoArquivo = $anexo["arquivo"]->store($evento->id);
 
             $evento->anexos()->save($attachment);
+
+            $attachment->link = route("attachments.download",$attachment);
+            $attachment->save();
         }
 
         $moderadores = User::whereHas("roles", function($query){$query->where("name","Moderador");})->get();
@@ -110,7 +113,11 @@ class EventController extends Controller
                 abort(403);
             }
         }elseif(Auth::check()){
-            $hasValidSignature = false;
+            if(Auth::user()->hasRole(["Administrador", "Moderador"])){
+                $hasValidSignature = false;
+            }else{
+                abort(403);
+            }
         }else{
             return redirect("/login");
         }
@@ -175,6 +182,9 @@ class EventController extends Controller
                 $attachment->caminhoArquivo = $anexo["arquivo"]->store($event->id);
 
                 $event->anexos()->save($attachment);
+
+                $attachment->link = route("attachments.download",$attachment);
+                $attachment->save();
             }
         }        
 
@@ -200,6 +210,12 @@ class EventController extends Controller
             return redirect("/login");
         }
 
+        foreach($event->anexos as $anexo){
+            Storage::delete($anexo->caminhoArquivo);
+            
+            $anexo->delete();
+        }
+
         $event->delete();
 
         return redirect("/events");
@@ -208,6 +224,11 @@ class EventController extends Controller
     public function aprovar(Request $request, Event $event)
     {
         $event->aprovado = true;
+        $event->dataAprovacao = date("d/m/Y");
+
+        if(Auth::check()){
+            $event->moderadorID = Auth::user()->id;
+        }
 
         $event->save();
 
@@ -223,6 +244,8 @@ class EventController extends Controller
     public function desaprovar(Request $request, Event $event)
     {
         $event->aprovado = false;
+        $event->dataAprovacao = null;
+        $event->moderadorID = null;
 
         $event->save();
 

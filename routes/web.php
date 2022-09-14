@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\AttachmentController;
+use App\Http\Controllers\ApiController;
 
 
 /*
@@ -29,3 +30,5 @@ Route::put("/events/invalidate/{event}", [EventController::class, "desaprovar"])
 Route::resource("events", EventController::class);
 
 Route::get("/attachment/download/{attachment}",[AttachmentController::class, "download"])->name("attachments.download");
+
+Route::get("/api/getAllEvents", [ApiController::class, "getAllEvents"]);

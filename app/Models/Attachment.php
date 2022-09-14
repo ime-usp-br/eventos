@@ -14,9 +14,16 @@ class Attachment extends Model
         'nome',
         'caminhoArquivo',
         'eventoID',
+        'link',
     ];
     
     public $timestamps = false;
+
+    protected $hidden = [
+        'id',
+        'caminhoArquivo',
+        'eventoID',
+    ];
 
     public function evento()
     {

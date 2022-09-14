@@ -14,4 +14,8 @@ class Language extends Model
     ];
     
     public $timestamps = false;
+
+    protected $hidden = [
+        'id',
+    ];
 }

@@ -17,6 +17,7 @@ class CreateAttachmentsTable extends Migration
             $table->id();
             $table->string("nome");
             $table->string("caminhoArquivo");
+            $table->string("link")->nullable();
             $table->unsignedInteger("eventoID");
         });
     }

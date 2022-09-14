@@ -20,7 +20,7 @@ class CreateEventsTable extends Migration
             $table->string("dataInicial");
             $table->string("dataFinal")->nullable();
             $table->string("horarioInicial");
-            $table->string("horarioFinal");
+            $table->string("horarioFinal")->nullable();
             $table->string("local");
             $table->boolean("exigeInscricao")->default(0);
             $table->boolean("gratuito")->default(0);

@@ -28,7 +28,7 @@ class UpdateEventRequest extends FormRequest
             "dataInicial" => "required|date_format:d/m/Y|before:dataFinal",
             "dataFinal" => "sometimes|nullable|date_format:d/m/Y",
             "horarioInicial" => "required|date_format:H:i|before:horarioFinal",
-            "horarioFinal" => "required|date_format:H:i",
+            "horarioFinal" => "sometimes|nullable|date_format:H:i",
             "local" => "required",
             "url" => "sometimes",
             'gratuito' => 'sometimes|bool',

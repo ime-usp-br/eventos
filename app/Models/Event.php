@@ -45,9 +45,22 @@ class Event extends Model
         'horarioFinal' => 'datetime:H:i',
     ];
 
+    protected $hidden = [
+        "id",
+        "cadastradorID",
+        "idiomaID",
+        "moderadorID",
+        "modalidadeID",
+        "tipoID",
+        "created_at",
+        "updated_at",
+        "dataAprovacao",
+        'aprovado',
+    ];
+
     public function setDataAprovacaoAttribute($value)
     {
-        $this->attributes['dataAprovacao'] = Carbon::createFromFormat('d/m/Y', $value);
+        $this->attributes['dataAprovacao'] = $value ? Carbon::createFromFormat('d/m/Y', $value) : null;
     }
 
     public function getDataAprovacaoAttribute($value)
@@ -87,7 +100,7 @@ class Event extends Model
 
     public function setHorarioFinalAttribute($value)
     {
-        $this->attributes['horarioFinal'] = Carbon::createFromFormat('H:i', $value);
+        $this->attributes['horarioFinal'] = $value ? Carbon::createFromFormat('H:i', $value) : null;
     }
 
     public function getHorarioFinalAttribute($value)
