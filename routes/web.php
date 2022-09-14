@@ -24,6 +24,8 @@ Route::get('/', function () {
 Route::get('/users/loginas', [UserController::class, 'loginas'])->name("users.loginas");
 Route::resource("users", UserController::class);
 
+Route::put("/events/validate/{event}", [EventController::class, "aprovar"])->name("events.validate");
+Route::put("/events/invalidate/{event}", [EventController::class, "desaprovar"])->name("events.invalidate");
 Route::resource("events", EventController::class);
 
 Route::get("/attachment/download/{attachment}",[AttachmentController::class, "download"])->name("attachments.download");

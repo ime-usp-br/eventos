@@ -4,9 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreEventRequest;
 use App\Http\Requests\UpdateEventRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
+use \Illuminate\Support\Facades\URL;
+use App\Mail\NotifyModeratorAboutEvent;
+use App\Mail\NotifyUserAboutEvent;
 use App\Models\Event;
 use App\Models\Attachment;
+use App\Models\User;
 use Auth;
 
 class EventController extends Controller
@@ -25,7 +32,7 @@ class EventController extends Controller
                 $eventos = Event::where("cadastradorID", Auth::user()->id)->get();
             }
         }else{
-            abort(403);
+            return redirect("/login");
         }
         
         return view("events.index", compact(["eventos"]));
@@ -39,7 +46,7 @@ class EventController extends Controller
     public function create()
     {
         if(!Auth::check()){
-            abort(403);
+            return redirect("/login");
         }
 
         $evento = new Event;
@@ -56,7 +63,7 @@ class EventController extends Controller
     public function store(StoreEventRequest $request)
     {
         if(!Auth::check()){
-            abort(403);
+            return redirect("/login");
         }
 
         $validated = $request->validated();
@@ -75,6 +82,15 @@ class EventController extends Controller
             $evento->anexos()->save($attachment);
         }
 
+        $moderadores = User::whereHas("roles", function($query){$query->where("name","Moderador");})->get();
+
+        if($moderadores){
+            foreach($moderadores as $moderador){
+                Mail::to($moderador->email)->send(new NotifyModeratorAboutEvent($moderador, $evento,
+                    URL::signedRoute("events.show", ["event"=>$evento->id])));
+            }
+        }
+
 
         return redirect("/events");
     }
@@ -85,9 +101,21 @@ class EventController extends Controller
      * @param  \App\Models\Event  $event
      * @return \Illuminate\Http\Response
      */
-    public function show(Event $event)
+    public function show(Request $request, Event $event)
     {
-        //
+        if($request->has("signature")){
+            if($request->hasValidSignature()){
+                $hasValidSignature = true;
+            }else{
+                abort(403);
+            }
+        }elseif(Auth::check()){
+            $hasValidSignature = false;
+        }else{
+            return redirect("/login");
+        }
+
+        return view("events.show", ["evento"=>$event, "hasValidSignature"=>$hasValidSignature]);
     }
 
     /**
@@ -103,7 +131,7 @@ class EventController extends Controller
                 abort(403);
             }
         }else{
-            abort(403);
+            return redirect("/login");
         }
 
         return view("events.edit", ["evento"=>$event]);
@@ -123,7 +151,7 @@ class EventController extends Controller
                 abort(403);
             }
         }else{
-            abort(403);
+            return redirect("/login");
         }
 
         $validated = $request->validated();
@@ -169,11 +197,35 @@ class EventController extends Controller
                 abort(403);
             }
         }else{
-            abort(403);
+            return redirect("/login");
         }
 
         $event->delete();
 
         return redirect("/events");
+    }
+
+    public function aprovar(Request $request, Event $event)
+    {
+        $event->aprovado = true;
+
+        $event->save();
+
+        $validated = $request->validate(["sendUserEmail"=>"required|bool"]);
+
+        if($validated["sendUserEmail"]){
+            Mail::to($event->criador->email)->send(new NotifyUserAboutEvent($event));
+        }
+
+        return back();
+    }
+
+    public function desaprovar(Request $request, Event $event)
+    {
+        $event->aprovado = false;
+
+        $event->save();
+
+        return back();
     }
 }

@@ -25,8 +25,31 @@
                     <div class="card mb-3">
                         <div class="card-header">
                             <div class="row justify-content-between">
-                                <div class="col">
-                                    <b>Título:</b> {{$evento->titulo}}
+                                <div class="row justify-content-start ml-0">
+                                    <div class="col-sm-auto pl-2" style="margin-top:5px;">
+                                    <b>Aprovado:</b> {{$evento->aprovado ? " Sim" : " Não"}}
+                                    </div>
+                                    @if(Auth::user()->hasRole(["Administrador", "Moderador"]))
+                                        @include('events.modals.emailSendingConfirmation', ['eventoID'=>$evento->id])
+                                        <div class="col-sm-auto pl-2">
+                                            @if(!$evento->aprovado)
+                                                <a class="btn btn-outline-success btn-sm"
+                                                    data-toggle="modal"
+                                                    data-target="{{ '#emailSendingConfirmationModal' . $evento->id  }}"
+                                                >
+                                                        Validar Evento
+                                                </a>
+                                            @else
+                                                <form method="POST"  action="{{ route('events.invalidate',$evento) }}" style="display: inline;">
+                                                    @csrf
+                                                    @method('put')
+                                                    <button class="btn btn-outline-danger btn-sm" type="submit">
+                                                        Invalidar Evento
+                                                    </button>
+                                                </form>
+                                            @endif
+                                        </div>
+                                    @endif
                                 </div>
                                 @if(Auth::user()->hasRole(["Administrador", "Moderador"]) or $evento->cadastradorID == Auth::user()->id)
                                     <div class="text-rigth mr-3" style="white-space: nowrap;">
@@ -50,6 +73,10 @@
                             </div>
                         </div>
                         <div class="card-body">
+
+                            <div class="custom-form-group">
+                                    <label for="titulo">Título:</label> {{$evento->titulo}}
+                            </div>
 
                             <div class="row custom-form-group">
                                 <div class="col-lg lg-pb-3">
