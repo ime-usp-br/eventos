@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Event;
+use App\Models\Defense;
 
 class ApiController extends Controller
 {
@@ -38,5 +39,12 @@ class ApiController extends Controller
             })->toJson(JSON_PRETTY_PRINT);
 
         return response($eventos, 200);
+    }
+
+    public function getAllDefenses()
+    {
+        $defesas = Defense::with(["aluno.orientadores", "trabalho", "banca.membros"])
+            ->whereNotNull(["data","local","horario"])->get();
+        return response($defesas->toJson(JSON_PRETTY_PRINT),200);
     }
 }
