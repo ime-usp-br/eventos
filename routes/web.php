@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\AttachmentController;
 use App\Http\Controllers\ApiController;
+use App\Http\Controllers\DefenseController;
 
 
 /*
@@ -33,3 +34,5 @@ Route::get("/attachment/download/{attachment}",[AttachmentController::class, "do
 
 Route::get("/api/getAllEvents", [ApiController::class, "getAllEvents"]);
 Route::get("/api/getAllDefenses", [ApiController::class, "getAllDefenses"]);
+
+Route::resource("defenses", DefenseController::class);

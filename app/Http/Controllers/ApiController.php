@@ -45,6 +45,15 @@ class ApiController extends Controller
     {
         $defesas = Defense::with(["aluno.orientadores", "trabalho", "banca.membros"])
             ->whereNotNull(["data","local","horario"])->get();
-        return response($defesas->toJson(JSON_PRETTY_PRINT),200);
+        $defesas = $defesas->filter(function($defesa){
+            if($defesa->data > date("d/m/Y")){
+                return true;
+            }elseif($defesa->data == date("d/m/Y") and $defesa->horario >= date("H:i")){
+                return true;
+            }
+            return false;
+        })->toJson(JSON_PRETTY_PRINT);
+
+        return response($defesas,200);
     }
 }

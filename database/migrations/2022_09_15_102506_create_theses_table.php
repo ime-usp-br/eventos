@@ -16,8 +16,8 @@ class CreateThesesTable extends Migration
         Schema::create('theses', function (Blueprint $table) {
             $table->id();
             $table->string("titulo", 2048);
-            $table->text("resumo", 8192);
-            $table->string("palavrasChave", 2048);
+            $table->text("resumo", 8192)->nullable();
+            $table->string("palavrasChave", 2048)->nullable();
             $table->string("title", 2048)->nullable();
             $table->text("abstract", 8192)->nullable();
             $table->string("keyWords", 2048)->nullable();

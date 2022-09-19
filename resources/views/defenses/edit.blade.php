@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Editar Evento')
+@section('title', 'Editar Defesa')
 
 @section('content')
 @parent
@@ -10,7 +10,7 @@
             <div class="card">
                 <div class="card-header">
                     <b>
-                        Editar Evento
+                        Editar Defesa
                     </b>
                 </div>
                 <div class="card-body">
@@ -19,30 +19,15 @@
                         Os campos assinalados com * são de preenchimento obrigatório.
                     </p>
                     <form method="POST" enctype="multipart/form-data"
-                        action="{{ route('events.update', $evento) }}"
+                        action="{{ route('defenses.update', $defesa) }}"
                     >
                         @csrf
                         @method('patch')
-                        <input name="cadastradorID" value="{{Auth::user()->id}}" type="hidden">
-
-                        @include('events.partials.form', ['buttonText' => 'Editar'])
+                        @include('defenses.partials.form', ['buttonText' => 'Editar'])
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
-@endsection
-
-
-
-@section('javascripts_bottom')
- @parent
-<script>
-    tinymce.init({
-    selector: '#descricaoEvento',
-    plugins: 'link,code',
-    link_default_target: '_blank'
-    });
-</script>
 @endsection

@@ -13,7 +13,7 @@ class UpdateDefenseRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,9 @@ class UpdateDefenseRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            "local" => "required",
+            "data" => "required|date_format:d/m/Y",
+            "horario" => "required|date_format:H:i",
         ];
     }
 }

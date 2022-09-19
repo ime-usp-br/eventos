@@ -44,6 +44,9 @@
         <li>
             <a href="{{ route('events.index') }}">Eventos</a>
         </li>
+        <li>
+            <a href="{{ route('defenses.index') }}">Defesas</a>
+        </li>
           <li>
               <form style="padding:0px;" action="{{ route('logout') }}" method="POST" id="logout_form2">
                   @csrf

@@ -20,7 +20,6 @@ class CommitteeMember extends Model
         'id',
         'codpes',
         'bancaID',
-        'vinculo',
         "created_at",
         "updated_at",
     ];

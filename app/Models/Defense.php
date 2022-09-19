@@ -41,7 +41,7 @@ class Defense extends Model
 
     public function getDataAttribute($value)
     {
-        return $value ? Carbon::parse($value)->format('d/m/Y') : '';
+        return $value ? Carbon::parse($value)->format('d/m/Y') : null;
     }
 
     public function setHorarioAttribute($value)
@@ -51,7 +51,7 @@ class Defense extends Model
 
     public function getHorarioAttribute($value)
     {
-        return $value ? Carbon::parse($value)->format('H:i') : '';
+        return $value ? Carbon::parse($value)->format('H:i') : null;
     }
 
     public function aluno()
