@@ -65,26 +65,6 @@ class Kernel extends ConsoleKernel
                     $res2[0]["alunoID"] = $aluno->id;
                     $res2[0]["defesaID"] = $defesa->id;
                     Thesis::firstOrCreate($res2[0]);
-                }else{
-                    $query = " SELECT T.tittrb as titulo";
-                    $query .= " FROM AGPROGRAMA as AGP, TRABALHOPROG as T";
-                    $query .= " WHERE AGP.codpes = :codpes";
-                    $query .= " AND AGP.dtadfapgm IS NULL ";
-                    $query .= " AND AGP.dtaaprbantrb IS NOT NULL";
-                    $query .= " AND T.codare = AGP.codare";
-                    $query .= " AND T.codpes = AGP.codpes";
-                    $query .= " AND T.numseqpgm = AGP.numseqpgm";
-                    $param = [
-                        'codpes' => $aluno->codpes,
-                    ];
-            
-                    $res2 = array_unique(DB::fetchAll($query, $param),SORT_REGULAR);
-
-                    if($res2){
-                        $res2[0]["alunoID"] = $aluno->id;
-                        $res2[0]["defesaID"] = $defesa->id;
-                        Thesis::firstOrCreate($res2[0]);
-                    }
                 }
                 
                 $banca = Committee::firstOrCreate(["defesaID"=>$defesa->id]);
@@ -136,7 +116,7 @@ class Kernel extends ConsoleKernel
                     }
                 }
             }
-        })->dailyAt("14:59");
+        })->daily();
     }
 
     /**
