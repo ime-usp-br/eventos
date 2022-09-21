@@ -32,7 +32,7 @@ Route::resource("events", EventController::class);
 
 Route::get("/attachment/download/{attachment}",[AttachmentController::class, "download"])->name("attachments.download");
 
-Route::get("/api/getAllEvents", [ApiController::class, "getAllEvents"]);
-Route::get("/api/getAllDefenses", [ApiController::class, "getAllDefenses"]);
+Route::get("/api/eventos", [ApiController::class, "getAllEvents"]);
+Route::get("/api/defesas", [ApiController::class, "getAllDefenses"]);
 
 Route::resource("defenses", DefenseController::class);
