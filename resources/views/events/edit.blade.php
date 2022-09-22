@@ -18,6 +18,8 @@
                         <b>Atenção:</b>
                         Os campos assinalados com * são de preenchimento obrigatório.
                     </p>
+                    @include('events.modals.locationCreate')
+                    @include('events.modals.kindCreate')
                     <form method="POST" enctype="multipart/form-data"
                         action="{{ route('events.update', $evento) }}"
                     >

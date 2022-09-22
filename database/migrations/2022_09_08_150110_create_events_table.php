@@ -21,7 +21,7 @@ class CreateEventsTable extends Migration
             $table->string("dataFinal")->nullable();
             $table->string("horarioInicial");
             $table->string("horarioFinal")->nullable();
-            $table->string("local");
+            $table->string("localID");
             $table->boolean("exigeInscricao")->default(0);
             $table->boolean("gratuito")->default(0);
             $table->boolean("emiteCertificado")->default(0);

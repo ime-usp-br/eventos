@@ -34,7 +34,7 @@
         </div>
     </div>
     <div class="col-lg">
-        <label for="horarioFinal">Horário Final*:</label>
+        <label for="horarioFinal">Horário Final:</label>
         <div class="col-12 px-0">
             <input class="custom-form-control"
                 type="time" name="horarioFinal" id="horarioFinal" autocomplete="off" style="max-width:100px;"
@@ -46,10 +46,23 @@
 
 <div class="row custom-form-group">
     <div class="col-lg lg-pb-3">
-        <label for="local">Local*:</label>
-        <input class="custom-form-control" type="text" name="local" id="local"
-            value="{{ old('local') ?? $evento->local ?? ''}}"
-        />
+        <label for="localID">Local*:</label>
+        <a  class="text-dark text-decoration-none"
+            data-toggle="modal"
+            data-target="#locationCreateModal"
+            title="Cadastrar Novo Local"  style="cursor: pointer;"
+        >
+            <i class="fas fa-plus-circle"></i>
+        </a>
+        <div class="col-12 px-0">
+            <select class="custom-form-control pr-5" name="localID">
+                <option value=""></option>
+                @foreach(App\Models\Location::all() as $local)
+                    <option value="{{ $local->id }}" {{ $local->id==old('localID') ? "selected" : ($local->id==$evento->localID  ? "selected" : "" ) }}>{{ $local->nome }}</option>
+                @endforeach
+            </select>
+        </div>
+        <?php Session::forget('_old_input.localID') ?>
     </div>
     <div class="col-lg">
         <label for="url">URL*:</label>
@@ -89,9 +102,8 @@
         <label for="idiomaID">Idioma*:</label>
         <div class="col-12 px-0">
             <select class="custom-form-control" name="idiomaID" style="max-width:170px;">
-                <option value=""></option>
                 @foreach(App\Models\Language::all() as $idioma)
-                    <option value="{{ $idioma->id }}" {{ $idioma->id==old('idiomaID') ? "selected" : ($idioma->id==$evento->idiomaID  ? "selected" : "") }}>{{ $idioma->nome }}</option>
+                    <option value="{{ $idioma->id }}" {{ $idioma->id==old('idiomaID') ? "selected" : ($idioma->id==$evento->idiomaID  ? "selected" : ( $idioma->nome=="Português" ? "selected" : "" ) ) }}>{{ $idioma->nome }}</option>
                 @endforeach
             </select>
         </div>
@@ -109,6 +121,13 @@
     </div>
     <div class="col-lg">
         <label for="tipoID">Tipo*:</label>
+        <a  class="text-dark text-decoration-none"
+            data-toggle="modal"
+            data-target="#kindCreateModal"
+            title="Cadastrar Novo Tipo"  style="cursor: pointer;"
+        >
+            <i class="fas fa-plus-circle"></i>
+        </a>
         <div class="col-12 px-0">
             <select class="custom-form-control" name="tipoID" style="max-width:170px;">
                 <option value=""></option>
@@ -117,6 +136,7 @@
                 @endforeach
             </select>
         </div>
+        <?php Session::forget('_old_input.tipoID') ?>
     </div>
 </div>
 

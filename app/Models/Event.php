@@ -8,6 +8,7 @@ use App\Models\Attachment;
 use App\Models\Modality;
 use App\Models\Kind;
 use App\Models\Language;
+use App\Models\Location;
 use Carbon\Carbon;
 
 class Event extends Model
@@ -21,7 +22,7 @@ class Event extends Model
         'dataFinal',
         'horarioInicial',
         'horarioFinal',
-        'local',
+        'localID',
         'exigeInscricao',
         'gratuito',
         'emiteCertificado',
@@ -48,6 +49,7 @@ class Event extends Model
         "id",
         "cadastradorID",
         "idiomaID",
+        "localID",
         "moderadorID",
         "modalidadeID",
         "tipoID",
@@ -125,6 +127,11 @@ class Event extends Model
     public function idioma()
     {
         return $this->belongsTo(Language::class, "idiomaID");
+    }
+
+    public function local()
+    {
+        return $this->belongsTo(Location::class, "localID");
     }
 
     public function criador()

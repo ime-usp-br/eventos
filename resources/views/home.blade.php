@@ -2,7 +2,6 @@
 
 @section('content')
   @parent
-
   <div id="layout_conteudo">
     <div class="justify-content-center">
       <div class="col-12">
@@ -15,6 +14,7 @@
             })->orderBy("dataInicial")->get();
           $defesas = App\Models\Defense::whereNotNull(["data","local","horario"])->where("data", ">=", date("Y-m-d"))->orderBy("data")->get();
         @endphp
+
         @if($eventos->isNotEmpty() or $defesas->isNotEmpty())
           <h1 class='text-center mb-5'>Próximas defesas e eventos</h1>
 
@@ -35,7 +35,7 @@
                 <td>{{ $evento->tipo->nome }}</td>
                 <td>{{ $evento->dataInicial . ( $evento->dataFinal ? " à " . $evento->dataFinal : "") }}</td>
                 <td>{{ $evento->horarioInicial . ( $evento->horarioFinal ? " às " . $evento->horarioFinal : "" ) }}</td>
-                <td>{{ $evento->local }}</td>
+                <td>{{ $evento->local->nome }}</td>
               </tr>
             @endforeach
 

@@ -29,4 +29,15 @@ class UpdateDefenseRequest extends FormRequest
             "horario" => "required|date_format:H:i",
         ];
     }
+
+    public function messages()
+    {
+        return [
+            "local.required" => "É necessário informar o local da defesa.",
+            "data.required" => "É necessário informar a data da defesa.",
+            "data.date_format" => "A data da defesa precisa estar no formato dd/mm/YYYY.",
+            "horario.required" => "É necessário informar o horário da defesa.",
+            "horario.date_format" => "O horário da defesa precisa estar no formato HH:ii.",
+        ];
+    }
 }

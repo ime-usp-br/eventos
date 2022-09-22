@@ -10,7 +10,7 @@ class ApiController extends Controller
 {
     public function getAllEvents()
     {
-        $eventos = Event::with(["idioma","modalidade","tipo","anexos"])->where("aprovado", true)->where(function($query){
+        $eventos = Event::with(["local","idioma","modalidade","tipo","anexos"])->where("aprovado", true)->where(function($query){
             $query->whereNotNull("dataFinal")->where("dataFinal",">=", date("Y-m-d"))
                 ->orWhere(function($query2){
                     $query2->whereNull("dataFinal")->where("dataInicial", ">=", date("Y-m-d"));

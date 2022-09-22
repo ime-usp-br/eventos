@@ -9,17 +9,6 @@
         <div class="col-12">
             <h1 class='text-center mb-5'>Defesas</h1>
 
-            <p class="text-right">
-                <a  id="btn-addEvent"
-                    class="btn btn-outline-primary"
-                    title="Cadastrar Novo Evento" 
-                    href="{{ route('defenses.create') }}"
-                >
-                    <i class="fas fa-plus-circle"></i>
-                    Cadastrar
-                </a>
-            </p>
-
             @if (count($defesas) > 0)
                 @foreach($defesas as $defesa)
                     <div class="card mb-3">

@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             KindSeeder::class,
             ModalitySeeder::class,
             LanguageSeeder::class,
+            LocationSeeder::class,
         ]);
     }
 }
