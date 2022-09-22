@@ -180,7 +180,7 @@
     </div>
     <div class="col-sm-6 text-center text-sm-left my-1">
         <a class="btn btn-outline-dark"
-            href="{{ route('events.index') }}"
+            href="{{ route('defenses.index') }}"
         >
             Cancelar
         </a>

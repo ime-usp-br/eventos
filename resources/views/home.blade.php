@@ -30,7 +30,7 @@
 
             @foreach($eventos as $evento)
               <tr>
-                <td>{{ $evento->titulo }}</td>
+                <td>{!! $evento->titulo !!}</td>
                 <td>{{ $evento->nomeOrganizador }}</td>
                 <td>{{ $evento->tipo->nome }}</td>
                 <td>{{ $evento->dataInicial . ( $evento->dataFinal ? " à " . $evento->dataFinal : "") }}</td>
@@ -41,7 +41,7 @@
 
             @foreach($defesas as $defesa)
               <tr>
-                <td>{{ $defesa->trabalho->titulo }}</td>
+                <td>{!! $defesa->trabalho->titulo !!}</td>
                 <td>{{ $defesa->aluno->nome }}</td>
                 <td>{{ $defesa->nivel }}</td>
                 <td>{{ $defesa->data }}</td>
