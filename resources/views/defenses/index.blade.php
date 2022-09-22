@@ -109,7 +109,7 @@
                                         <label for="dataFinal">Local:</label>
                                     </div>
                                     <div class="col-lg-auto">
-                                        {{ $defesa->local ?? "Não informado"}}
+                                        {{ $defesa->local->nome ?? "Não informado"}}
                                     </div>
                                 </div>
                             </div>

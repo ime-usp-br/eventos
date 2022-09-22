@@ -24,7 +24,7 @@ class UpdateDefenseRequest extends FormRequest
     public function rules()
     {
         return [
-            "local" => "required",
+            "localID" => "required|numeric",
             "data" => "required|date_format:d/m/Y",
             "horario" => "required|date_format:H:i",
         ];
@@ -33,7 +33,7 @@ class UpdateDefenseRequest extends FormRequest
     public function messages()
     {
         return [
-            "local.required" => "É necessário informar o local da defesa.",
+            "localID.required" => "É necessário informar o local da defesa.",
             "data.required" => "É necessário informar a data da defesa.",
             "data.date_format" => "A data da defesa precisa estar no formato dd/mm/YYYY.",
             "horario.required" => "É necessário informar o horário da defesa.",

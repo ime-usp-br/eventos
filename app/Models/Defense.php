@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Student;
 use App\Models\Thesis;
 use App\Models\Committee;
+use App\Models\Location;
 use Carbon\Carbon;
 
 class Defense extends Model
@@ -18,13 +19,14 @@ class Defense extends Model
         'programa',
         'data',
         'horario',
-        'local',
+        'localID',
         'alunoID',
     ];
 
     protected $hidden = [
         'id',
         'alunoID',
+        'localID',
         "created_at",
         "updated_at",
     ];
@@ -67,5 +69,10 @@ class Defense extends Model
     public function banca()
     {
         return $this->hasOne(Committee::class, "defesaID");
+    }
+
+    public function local()
+    {
+        return $this->belongsTo(Location::class, "localID");
     }
 }

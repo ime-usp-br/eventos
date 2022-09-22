@@ -18,6 +18,7 @@
                         <b>Atenção:</b>
                         Os campos assinalados com * são de preenchimento obrigatório.
                     </p>
+                    @include('defenses.modals.locationCreate')
                     <form method="POST" enctype="multipart/form-data"
                         action="{{ route('defenses.update', $defesa) }}"
                     >

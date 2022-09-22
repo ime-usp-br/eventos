@@ -22,8 +22,8 @@ class ApiController extends Controller
 
     public function getAllDefenses()
     {
-        $defesas = Defense::with(["aluno.orientadores", "trabalho", "banca.membros"])
-            ->whereNotNull(["data","local","horario"])->where("data", ">=", date("Y-m-d"))->get();
+        $defesas = Defense::with(["aluno.orientadores", "trabalho", "banca.membros", "local"])->whereHas("local")
+            ->whereNotNull(["data","horario"])->where("data", ">=", date("Y-m-d"))->get();
             
         return response($defesas->toJson(JSON_PRETTY_PRINT),200);
     }

@@ -12,7 +12,7 @@
                   $query2->whereNull("dataFinal")->where("dataInicial", ">=", date("Y-m-d"));
               });
             })->orderBy("dataInicial")->get();
-          $defesas = App\Models\Defense::whereNotNull(["data","local","horario"])->where("data", ">=", date("Y-m-d"))->orderBy("data")->get();
+          $defesas = App\Models\Defense::whereHas("local")->whereNotNull(["data","horario"])->where("data", ">=", date("Y-m-d"))->orderBy("data")->get();
         @endphp
 
         @if($eventos->isNotEmpty() or $defesas->isNotEmpty())
@@ -46,7 +46,7 @@
                 <td>{{ $defesa->nivel }}</td>
                 <td>{{ $defesa->data }}</td>
                 <td>{{ $defesa->horario }}</td>
-                <td>{{ $defesa->local }}</td>
+                <td>{{ $defesa->local->nome }}</td>
               </tr>
             @endforeach
 

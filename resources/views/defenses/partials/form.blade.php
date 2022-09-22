@@ -53,13 +53,24 @@
 <div class="row custom-form-group">
     <div class="row col-lg">
         <div class="col-lg-auto pr-0 mt-1">
-            <label for="local">Local*:</label>
+            <label for="localID">Local*:</label>
+            <a  class="text-dark text-decoration-none"
+                data-toggle="modal"
+                data-target="#locationCreateModal"
+                title="Cadastrar Novo Local"  style="cursor: pointer;"
+            >
+                <i class="fas fa-plus-circle"></i>
+            </a>
         </div>
         <div class="col-lg-6">
-            <input class="custom-form-control" type="text" name="local" id="local"
-                value="{{ old('local') ?? $defesa->local ?? ''}}"
-            />
+            <select class="custom-form-control pr-5" name="localID">
+                <option value=""></option>
+                @foreach(App\Models\Location::all() as $local)
+                    <option value="{{ $local->id }}" {{ $local->id==old('localID') ? "selected" : ($local->id==$defesa->localID  ? "selected" : "" ) }}>{{ $local->nome }}</option>
+                @endforeach
+            </select>
         </div>
+        <?php Session::forget('_old_input.localID') ?>
     </div>
 </div>
 
