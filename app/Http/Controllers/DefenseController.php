@@ -21,7 +21,7 @@ class DefenseController extends Controller
             return redirect("/login");
         }
 
-        $defesas = Defense::whereHas("trabalho")->get();
+        $defesas = Defense::whereHas("trabalho")->get()->sortByDesc("data");
 
         return view("defenses.index", compact(["defesas"]));
     }

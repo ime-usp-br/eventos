@@ -80,7 +80,7 @@
 
                     <div class="row custom-form-group">
                         <div class="col-lg lg-pb-3">
-                            <label for="local">Local:</label> {{$evento->local}}
+                            <label for="local">Local:</label> {{$evento->local->nome}}
                         </div>
                         <div class="col-lg">
                             <label for="url">URL:</label> {{$evento->url}}
