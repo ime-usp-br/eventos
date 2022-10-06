@@ -18,6 +18,7 @@ class CreateAdvisorsTable extends Migration
             $table->string("nome");
             $table->unsignedBigInteger("codpes");
             $table->string("tipo");
+            $table->string("sexo");
             $table->timestamps();
         });
     }

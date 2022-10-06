@@ -19,6 +19,7 @@ class CreateCommitteeMembersTable extends Migration
             $table->string("vinculo");
             $table->string("nome");
             $table->unsignedBigInteger("codpes");
+            $table->string("sexo");
             $table->timestamps();
         });
     }

@@ -17,6 +17,7 @@ class CreateStudentsTable extends Migration
             $table->id();
             $table->string("nome");
             $table->unsignedBigInteger("codpes");
+            $table->string("sexo");
             $table->timestamps();
         });
     }

@@ -12,6 +12,7 @@ class Student extends Model
     protected $fillable = [
         "nome",
         "codpes",
+        "sexo",
     ];
 
     protected $hidden = [

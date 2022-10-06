@@ -14,6 +14,7 @@ class Advisor extends Model
         'tipo',
         'nome',
         'codpes',
+        'sexo',
     ];
 
     protected $hidden = [
