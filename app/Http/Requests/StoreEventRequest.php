@@ -30,7 +30,6 @@ class StoreEventRequest extends FormRequest
             "horarioInicial" => "required|date_format:H:i|before:horarioFinal",
             "horarioFinal" => "sometimes|nullable|date_format:H:i",
             "localID" => "required|numeric",
-            "url" => "sometimes",
             'gratuito' => 'sometimes|bool',
             'emiteCertificado' => 'sometimes|bool',
             'exigeInscricao' => 'sometimes|bool',

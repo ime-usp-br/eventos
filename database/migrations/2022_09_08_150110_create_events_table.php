@@ -26,7 +26,6 @@ class CreateEventsTable extends Migration
             $table->boolean("gratuito")->default(0);
             $table->boolean("emiteCertificado")->default(0);
             $table->string("idiomaID");
-            $table->string("url")->nullable();
             $table->string("nomeOrganizador");
             $table->string("descricao", 8192);
             $table->boolean("aprovado")->default(0);

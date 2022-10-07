@@ -27,6 +27,7 @@ class UpdateDefenseRequest extends FormRequest
             "localID" => "required|numeric",
             "data" => "required|date_format:d/m/Y",
             "horario" => "required|date_format:H:i",
+            "link" => "sometimes",
         ];
     }
 

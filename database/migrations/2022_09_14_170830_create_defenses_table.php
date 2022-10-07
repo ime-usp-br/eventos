@@ -19,6 +19,7 @@ class CreateDefensesTable extends Migration
             $table->string("programa");
             $table->string("data")->nullable();
             $table->string("horario")->nullable();
+            $table->string("link")->nullable();
             $table->unsignedInteger("localID")->nullable();
             $table->unsignedInteger("alunoID");
             $table->timestamps();

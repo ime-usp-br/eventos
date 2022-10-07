@@ -62,8 +62,8 @@
                 <i class="fas fa-plus-circle"></i>
             </a>
         </div>
-        <div class="col-lg-6">
-            <select class="custom-form-control pr-5" name="localID">
+        <div class="col-lg">
+            <select class="custom-form-control" name="localID">
                 <option value=""></option>
                 @foreach(App\Models\Location::all() as $local)
                     <option value="{{ $local->id }}" {{ $local->id==old('localID') ? "selected" : ($local->id==$defesa->localID  ? "selected" : "" ) }}>{{ $local->nome }}</option>
@@ -71,6 +71,16 @@
             </select>
         </div>
         <?php Session::forget('_old_input.localID') ?>
+    </div>
+    <div class="row col-lg">
+        <div class="col-lg-auto pr-0 mt-1">
+            <label for="link">Link*:</label>
+        </div>
+        <div class="col-lg">
+            <input class="custom-form-control" type="text" name="link" id="link"
+                value="{{ old('link') ?? $defesa->link ?? ''}}"
+            />
+        </div>
     </div>
 </div>
 

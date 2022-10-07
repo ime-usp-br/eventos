@@ -27,7 +27,6 @@ class Event extends Model
         'gratuito',
         'emiteCertificado',
         'idiomaID',
-        'url',
         'nomeOrganizador',
         'descricao',
         'aprovado',

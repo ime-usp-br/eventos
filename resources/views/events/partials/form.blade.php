@@ -65,9 +65,9 @@
         <?php Session::forget('_old_input.localID') ?>
     </div>
     <div class="col-lg">
-        <label for="url">URL*:</label>
-        <input class="custom-form-control" type="text" name="url" id="url"
-            value="{{ old('url') ?? $evento->url ?? ''}}"
+        <label for="nomeOrganizador">Nome do Organizador*:</label>
+        <input class="custom-form-control" type="text" name="nomeOrganizador" id="nomeOrganizador"
+            value="{{ old('nomeOrganizador') ?? $evento->nomeOrganizador ?? ''}}"
         />
     </div>
 </div>
@@ -88,13 +88,6 @@
         <input class="checkbox" type="checkbox" name="emiteCertificado"
         value="1" {{ old('emiteCertificado') ? 'checked' : ($evento->emiteCertificado ? 'checked' : '')  }}/>
     </div>
-</div>
-
-<div class="custom-form-group">
-        <label for="nomeOrganizador">Nome do Organizador*:</label>
-        <input class="custom-form-control" type="text" name="nomeOrganizador" id="nomeOrganizador"
-            value="{{ old('nomeOrganizador') ?? $evento->nomeOrganizador ?? ''}}"
-        />
 </div>
 
 <div class="row custom-form-group">

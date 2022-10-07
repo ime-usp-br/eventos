@@ -19,6 +19,7 @@ class Defense extends Model
         'programa',
         'data',
         'horario',
+        'link',
         'localID',
         'alunoID',
     ];

@@ -98,7 +98,7 @@
                                     <label for="local">Local:</label> {{$evento->local->nome}}
                                 </div>
                                 <div class="col-lg">
-                                    <label for="url">URL:</label> {{$evento->url}}
+                                    <label for="nomeOrganizador">Nome do Organizador:</label> {{$evento->nomeOrganizador}}
                                 </div>
                             </div>
 
@@ -112,10 +112,6 @@
                                 <div class="col-lg">
                                     <label for="emiteCertificado">Emite Certificado:</label> {{ $evento->emiteCertificado ? 'Sim' : 'Não' }}
                                 </div>
-                            </div>
-
-                            <div class="custom-form-group">
-                                    <label for="nomeOrganizador">Nome do Organizador:</label> {{$evento->nomeOrganizador}}
                             </div>
 
                             <div class="row custom-form-group">

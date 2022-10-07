@@ -114,6 +114,17 @@
                                 </div>
                             </div>
 
+                            <div class="row custom-form-group">
+                                <div class="row col-lg lg-pb-3">
+                                    <div class="col-lg-auto">
+                                        <label for="link">link:</label>
+                                    </div>
+                                    <div class="col-lg-auto">
+                                        {{ $defesa->link ?? "Não informado"}}
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="card mb-3">
                                 <div class="card-header">
                                     <b>Banca</b>
