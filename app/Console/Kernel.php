@@ -104,6 +104,7 @@ class Kernel extends ConsoleKernel
                 $query .= " AND R.codpespgm = :codpespgm";
                 $query .= " AND R.numseqpgm = AGP.numseqpgm";
                 $query .= " AND R.staort = :staort";
+                $query .= " AND R.dtafimort IS NULL";
                 $query .= " AND VP.codpes = R.codpes";
                 $query .= " AND P.codpes = VP.codpes";
                 $param = [
