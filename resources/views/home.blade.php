@@ -43,7 +43,7 @@
               <tr>
                 <td>{!! $defesa->trabalho->titulo !!}</td>
                 <td>{{ $defesa->aluno->nome }}</td>
-                <td>{{ $defesa->nivel }}</td>
+                <td>{{ str_contains($defesa->nivel, "Doutorado") ? "Defesa de Doutorado" : "Defesa de Mestrado" }}</td>
                 <td>{{ $defesa->data }}</td>
                 <td>{{ $defesa->horario }}</td>
                 <td>{{ $defesa->local->nome }}</td>
