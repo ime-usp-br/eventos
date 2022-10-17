@@ -46,7 +46,7 @@
 
 <div class="row custom-form-group">
     <div class="col-lg lg-pb-3">
-        <label for="localID">Local*:</label>
+        <label for="local">Local*:</label>
         <a  class="text-dark text-decoration-none"
             data-toggle="modal"
             data-target="#locationCreateModal"
@@ -55,14 +55,13 @@
             <i class="fas fa-plus-circle"></i>
         </a>
         <div class="col-12 px-0">
-            <select class="custom-form-control pr-5" name="localID">
-                <option value=""></option>
+            <select class="custom-form-control pr-5" name="local" id="local">
+                <option value="" ></option>
                 @foreach(App\Models\Location::all() as $local)
-                    <option value="{{ $local->id }}" {{ $local->id==old('localID') ? "selected" : ($local->id==$evento->localID  ? "selected" : "" ) }}>{{ $local->nome }}</option>
+                    <option value="{{ $local->nome }}" {{ $local->nome==old('local') ? "selected" : ($local->id==$evento->localID  ? "selected" : "" ) }}>{{ $local->nome }}</option>
                 @endforeach
             </select>
         </div>
-        <?php Session::forget('_old_input.localID') ?>
     </div>
     <div class="col-lg">
         <label for="nomeOrganizador">Nome do Organizador*:</label>
@@ -113,7 +112,7 @@
         </div>
     </div>
     <div class="col-lg">
-        <label for="tipoID">Tipo*:</label>
+        <label for="tipo">Tipo*:</label>
         <a  class="text-dark text-decoration-none"
             data-toggle="modal"
             data-target="#kindCreateModal"
@@ -122,10 +121,10 @@
             <i class="fas fa-plus-circle"></i>
         </a>
         <div class="col-12 px-0">
-            <select class="custom-form-control" name="tipoID" style="max-width:170px;">
+            <select class="custom-form-control" name="tipo" id="tipo" style="max-width:170px;">
                 <option value=""></option>
                 @foreach(App\Models\Kind::all() as $tipo)
-                    <option value="{{ $tipo->id }}" {{ $tipo->id==old('tipoID') ? "selected" : ($tipo->id==$evento->tipoID  ? "selected" : "") }}>{{ $tipo->nome }}</option>
+                    <option value="{{ $tipo->nome }}" {{ $tipo->nome==old('tipo') ? "selected" : ($tipo->id==$evento->tipoID  ? "selected" : "") }}>{{ $tipo->nome }}</option>
                 @endforeach
             </select>
         </div>

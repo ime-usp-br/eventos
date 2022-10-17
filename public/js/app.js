@@ -27,4 +27,24 @@ $(function(){
       '</div></div>'].join("\n");
       $('#novos-anexos').append(html);
     });
+    $('#btn-createLocation').on('click', function(e) {
+      var locationName = $("#locationName").val();
+      $("#local").prop("selected", false);
+      
+      $("#local").append("<option value='"+locationName+"' selected>"+locationName+"</option>");
+
+      $('#locationCreateModal').hide();
+      $('body').removeClass('modal-open');
+      $('.modal-backdrop').remove(); 
+    });
+    $('#btn-createKind').on('click', function(e) {
+      var kindName = $("#kindName").val();
+      $("#tipo").prop("selected", false);
+      
+      $("#tipo").append("<option value='"+kindName+"' selected>"+kindName+"</option>");
+
+      $('#kindCreateModal').hide();
+      $('body').removeClass('modal-open');
+      $('.modal-backdrop').remove(); 
+    });
 });

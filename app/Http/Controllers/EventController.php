@@ -14,6 +14,8 @@ use App\Mail\NotifyUserAboutEvent;
 use App\Models\Event;
 use App\Models\Attachment;
 use App\Models\User;
+use App\Models\Location;
+use App\Models\Kind;
 use Auth;
 
 class EventController extends Controller
@@ -70,6 +72,12 @@ class EventController extends Controller
 
         $anexos = $validated["anexosNovos"] ?? [];
         unset($validated["anexosNovos"]);
+
+        $validated["localID"] = Location::firstOrCreate(["nome"=>$validated["local"]])->id;
+        unset($validated["local"]);
+
+        $validated["tipoID"] = Kind::firstOrCreate(["nome"=>$validated["tipo"]])->id;
+        unset($validated["tipo"]);
 
         $evento = Event::firstOrCreate($validated);
 
@@ -165,6 +173,12 @@ class EventController extends Controller
         $validated['exigeInscricao'] = isset($validated['exigeInscricao']) ? 1 : 0;
         $validated['gratuito'] = isset($validated['gratuito']) ? 1 : 0;
         $validated['emiteCertificado'] = isset($validated['emiteCertificado']) ? 1 : 0;
+
+        $validated["localID"] = Location::firstOrCreate(["nome"=>$validated["local"]])->id;
+        unset($validated["local"]);
+
+        $validated["tipoID"] = Kind::firstOrCreate(["nome"=>$validated["tipo"]])->id;
+        unset($validated["tipo"]);
 
         foreach($event->anexos as $anexo){
             if(!in_array($anexo->id, $validated["anexosIDs"])){

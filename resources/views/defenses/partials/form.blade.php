@@ -53,7 +53,7 @@
 <div class="row custom-form-group">
     <div class="row col-lg">
         <div class="col-lg-auto pr-0 mt-1">
-            <label for="localID">Local*:</label>
+            <label for="local">Local*:</label>
             <a  class="text-dark text-decoration-none"
                 data-toggle="modal"
                 data-target="#locationCreateModal"
@@ -63,14 +63,13 @@
             </a>
         </div>
         <div class="col-lg">
-            <select class="custom-form-control" name="localID">
+            <select class="custom-form-control" name="local" id="local">
                 <option value=""></option>
                 @foreach(App\Models\Location::all() as $local)
-                    <option value="{{ $local->id }}" {{ $local->id==old('localID') ? "selected" : ($local->id==$defesa->localID  ? "selected" : "" ) }}>{{ $local->nome }}</option>
+                    <option value="{{ $local->nome }}" {{ $local->nome==old('local') ? "selected" : ($local->id==$defesa->localID  ? "selected" : "" ) }}>{{ $local->nome }}</option>
                 @endforeach
             </select>
         </div>
-        <?php Session::forget('_old_input.localID') ?>
     </div>
     <div class="row col-lg">
         <div class="col-lg-auto pr-0 mt-1">

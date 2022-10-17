@@ -6,6 +6,7 @@ use App\Http\Requests\StoreDefenseRequest;
 use App\Http\Requests\UpdateDefenseRequest;
 use App\Models\Defense;
 use Uspdev\Replicado\DB;
+use App\Models\Location;
 use Auth;
 
 class DefenseController extends Controller
@@ -95,6 +96,9 @@ class DefenseController extends Controller
         }
 
         $validated = $request->validated();
+
+        $validated["localID"] = Location::firstOrCreate(["nome"=>$validated["local"]])->id;
+        unset($validated["local"]);
 
         $defense->update($validated);
 
