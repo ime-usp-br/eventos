@@ -28,7 +28,7 @@
         <label for="horarioInicial">Horário Inicial*:</label>
         <div class="col-12 px-0">
             <input class="custom-form-control"
-                type="time" name="horarioInicial" id="horarioInicial" autocomplete="off" style="max-width:100px;"
+                type="time" name="horarioInicial" id="horarioInicial" autocomplete="off" style="max-width:130px;"
                 value="{{ old('horarioInicial') ?? $evento->horarioInicial ?? ''}}"
             />
         </div>
@@ -37,7 +37,7 @@
         <label for="horarioFinal">Horário Final:</label>
         <div class="col-12 px-0">
             <input class="custom-form-control"
-                type="time" name="horarioFinal" id="horarioFinal" autocomplete="off" style="max-width:100px;"
+                type="time" name="horarioFinal" id="horarioFinal" autocomplete="off" style="max-width:130px;" 
                 value="{{ old('horarioFinal') ?? $evento->horarioFinal ?? ''}}"
             />
         </div>
