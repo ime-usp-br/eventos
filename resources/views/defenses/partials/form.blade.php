@@ -101,8 +101,8 @@
             <label for="horario">Horário*:</label>
         </div>
         <div class="col-lg-auto">
-            <input class="custom-form-control"
-                type="time" name="horario" id="horario" autocomplete="off" style="max-width:100px;"
+            <input class="custom-form-control custom-timepicker"
+                name="horario" id="horario" autocomplete="off" style="max-width:100px;"
                 value="{{ old('horario') ?? $defesa->horario ?? ''}}"
             />
         </div>

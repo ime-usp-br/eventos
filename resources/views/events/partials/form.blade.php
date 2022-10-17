@@ -27,8 +27,8 @@
     <div class="col-lg lg-pb-3">
         <label for="horarioInicial">Horário Inicial*:</label>
         <div class="col-12 px-0">
-            <input class="custom-form-control"
-                type="time" name="horarioInicial" id="horarioInicial" autocomplete="off" style="max-width:130px;"
+            <input class="custom-form-control custom-timepicker"
+                name="horarioInicial" id="horarioInicial" autocomplete="off" style="max-width:130px;"
                 value="{{ old('horarioInicial') ?? $evento->horarioInicial ?? ''}}"
             />
         </div>
@@ -36,8 +36,8 @@
     <div class="col-lg">
         <label for="horarioFinal">Horário Final:</label>
         <div class="col-12 px-0">
-            <input class="custom-form-control"
-                type="time" name="horarioFinal" id="horarioFinal" autocomplete="off" style="max-width:130px;" 
+            <input class="custom-form-control custom-timepicker"
+                name="horarioFinal" id="horarioFinal" autocomplete="off" style="max-width:130px;" 
                 value="{{ old('horarioFinal') ?? $evento->horarioFinal ?? ''}}"
             />
         </div>

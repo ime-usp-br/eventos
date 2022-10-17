@@ -1,4 +1,10 @@
 $(function(){
+    $('.custom-timepicker').bootstrapMaterialDatePicker({
+      date: false,
+      format: 'HH:mm',
+      shortTime: false,
+      clearButton: true
+    }); 
     $('.custom-datepicker').datepicker({
       showOn: 'both',
       buttonText: '<i class="far fa-calendar"></i>',
