@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreEventRequest;
 use App\Http\Requests\UpdateEventRequest;
+use App\Http\Requests\IndexEventRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
@@ -25,17 +26,35 @@ class EventController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(IndexEventRequest $request)
     {
-        if(Auth::check()){
-            if(Auth::user()->hasRole(["Administrador", "Moderador"])){
-                $eventos = Event::all();
-            }else{
-                $eventos = Event::where("cadastradorID", Auth::user()->id)->get();
-            }
-        }else{
+        if(!Auth::check()){
             return redirect("/login");
         }
+
+        $validated = $request->validated();
+
+        if(isset($validated["filtro"])){
+            if($validated["filtro"] == "passados"){
+                $eventos = Event::whereNotNull("dataFinal")->where("dataFinal","<", date("Y-m-d"))
+                                    ->orWhere(function($query){
+                                        $query->whereNull("dataFinal")->where("dataInicial", "<", date("Y-m-d"));
+                                    })->get();
+            }elseif($validated["filtro"] == "futuros"){
+                $eventos = Event::whereNotNull("dataFinal")->where("dataFinal",">=", date("Y-m-d"))
+                                    ->orWhere(function($query){
+                                        $query->whereNull("dataFinal")->where("dataInicial", ">=", date("Y-m-d"));
+                                    })->get();
+            }
+        }else{
+            $eventos = Event::all();
+        }
+
+        if(!Auth::user()->hasRole(["Administrador", "Moderador"])){
+            $eventos = $eventos->where("cadastradorID", Auth::user()->id);
+        }
+
+        $eventos = $eventos->sortByDesc("dataInicial");
         
         return view("events.index", compact(["eventos"]));
     }

@@ -9,6 +9,30 @@
         <div class="col-12">
             <h1 class='text-center mb-5'>Defesas</h1>
 
+            <div class="d-flex justify-content-end">
+                <div class="px-1 py-2">
+                    <form action="{{ route('defenses.index') }}" method="GET">
+                        <input type="hidden" name="filtro" value="passados">
+
+                        <button class="btn btn-outline-primary" type="submit">Defesas Passadas</button>
+                    </form>
+                </div>
+                <div class="px-1 py-2">
+                    <form action="{{ route('defenses.index') }}" method="GET">
+                        <input type="hidden" name="filtro" value="nao_agendadas">
+
+                        <button class="btn btn-outline-primary" type="submit">Não Agendadas</button>
+                    </form>
+                </div>
+                <div class="px-1 py-2">
+                    <form action="{{ route('defenses.index') }}" method="GET">
+                        <input type="hidden" name="filtro" value="futuros">
+
+                        <button class="btn btn-outline-primary" type="submit">Defesas Futuras</button>
+                    </form>
+                </div>
+            </div>
+
             @if (count($defesas) > 0)
                 @foreach($defesas as $defesa)
                     <div class="card mb-3">

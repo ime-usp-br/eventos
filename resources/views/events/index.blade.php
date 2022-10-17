@@ -9,17 +9,33 @@
         <div class="col-12">
             <h1 class='text-center mb-5'>Eventos</h1>
 
-            <p class="text-right">
-                <a  id="btn-addEvent"
-                    class="btn btn-outline-primary"
-                    title="Cadastrar Novo Evento" 
-                    href="{{ route('events.create') }}"
-                >
-                    <i class="fas fa-plus-circle"></i>
-                    Cadastrar
-                </a>
-            </p>
 
+            <div class="d-flex justify-content-end">
+                <div class="px-1 py-2">
+                    <form action="{{ route('events.index') }}" method="GET" style="display: inline-block;">
+                        <input type="hidden" name="filtro" value="passados">
+
+                        <button class="btn btn-outline-primary" type="submit">Eventos Passados</button>
+                    </form>
+                </div>
+                <div class="px-1 py-2">
+                    <form action="{{ route('events.index') }}" method="GET" style="display: inline-block;">
+                        <input type="hidden" name="filtro" value="futuros">
+
+                        <button class="btn btn-outline-primary" type="submit">Eventos Futuros</button>
+                    </form>
+                </div>
+                <div class="px-1 py-2">
+                    <a  id="btn-addEvent"
+                        class="btn btn-outline-primary"
+                        title="Cadastrar Novo Evento" 
+                        href="{{ route('events.create') }}"
+                    >
+                        <i class="fas fa-plus-circle"></i>
+                        Cadastrar
+                    </a>
+                </div>
+            </div>
             @if (count($eventos) > 0)
                 @foreach($eventos as $evento)
                     <div class="card mb-3">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreDefenseRequest;
 use App\Http\Requests\UpdateDefenseRequest;
+use App\Http\Requests\IndexDefenseRequest;
 use App\Models\Defense;
 use Uspdev\Replicado\DB;
 use App\Models\Location;
@@ -16,13 +17,29 @@ class DefenseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(IndexDefenseRequest $request)
     {
         if(!Auth::check()){
             return redirect("/login");
+        }elseif(!Auth::user()->hasRole(["Administrador", "Moderador"])){
+            abort(403);
         }
 
-        $defesas = Defense::whereHas("trabalho")->get()->sortByDesc("data");
+        $validated = $request->validated();
+
+        if(isset($validated["filtro"])){
+            if($validated["filtro"] == "passados"){
+                $defesas = Defense::whereHas("trabalho")->whereNotNull("data")->where("data","<", date("Y-m-d"))->get();
+            }elseif($validated["filtro"] == "futuros"){
+                $defesas = Defense::whereHas("trabalho")->whereNotNull("data")->where("data",">=", date("Y-m-d"))->get();
+            }elseif($validated["filtro"] == "nao_agendadas"){
+                $defesas = Defense::whereHas("trabalho")->whereNull("data")->get();
+            }
+        }else{
+            $defesas = Defense::whereHas("trabalho")->get();
+        }
+
+        $defesas = $defesas->sortByDesc("data");
 
         return view("defenses.index", compact(["defesas"]));
     }
