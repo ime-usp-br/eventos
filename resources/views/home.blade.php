@@ -21,7 +21,7 @@
           <table class="table table-bordered table-striped table-hover" style="font-size:12px;">
             <tr>
               <th><b>Titulo</b></th>
-              <th>Autor</th>
+              <th>Autor/Organizador</th>
               <th>Tipo</th>
               <th>Data</th>
               <th>Horário</th>
