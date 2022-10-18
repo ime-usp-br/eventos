@@ -20,6 +20,13 @@
                 </div>
                 <div class="px-1 py-2">
                     <form action="{{ route('events.index') }}" method="GET" style="display: inline-block;">
+                        <input type="hidden" name="filtro" value="nao_aprovados">
+
+                        <button class="btn btn-outline-primary" type="submit">Não Aprovados</button>
+                    </form>
+                </div>
+                <div class="px-1 py-2">
+                    <form action="{{ route('events.index') }}" method="GET" style="display: inline-block;">
                         <input type="hidden" name="filtro" value="futuros">
 
                         <button class="btn btn-outline-primary" type="submit">Eventos Futuros</button>

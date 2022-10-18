@@ -45,6 +45,8 @@ class EventController extends Controller
                                     ->orWhere(function($query){
                                         $query->whereNull("dataFinal")->where("dataInicial", ">=", date("Y-m-d"));
                                     })->get();
+            }elseif($validated["filtro"] == "nao_aprovados"){
+                $eventos = Event::where("aprovado", false)->get();
             }
         }else{
             $eventos = Event::all();

@@ -24,7 +24,7 @@ class IndexEventRequest extends FormRequest
     public function rules()
     {
         return [
-            "filtro"=>"sometimes|in:passados,futuros"
+            "filtro"=>"sometimes|in:passados,futuros,nao_aprovados"
         ];
     }
 }
