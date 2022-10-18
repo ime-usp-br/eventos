@@ -17,6 +17,7 @@ use App\Models\Attachment;
 use App\Models\User;
 use App\Models\Location;
 use App\Models\Kind;
+use Carbon\Carbon;
 use Auth;
 
 class EventController extends Controller
@@ -56,7 +57,7 @@ class EventController extends Controller
             $eventos = $eventos->where("cadastradorID", Auth::user()->id);
         }
 
-        $eventos = $eventos->sortByDesc("dataInicial");
+        $eventos = $eventos->sortByDesc(function($item){return Carbon::createFromFormat('d/m/Y', $item->dataInicial)->format('Y-m-d H:i:s');});
         
         return view("events.index", compact(["eventos"]));
     }

@@ -8,6 +8,7 @@ use App\Http\Requests\IndexDefenseRequest;
 use App\Models\Defense;
 use Uspdev\Replicado\DB;
 use App\Models\Location;
+use Carbon\Carbon;
 use Auth;
 
 class DefenseController extends Controller
@@ -39,7 +40,7 @@ class DefenseController extends Controller
             $defesas = Defense::whereHas("trabalho")->get();
         }
 
-        $defesas = $defesas->sortByDesc("data");
+        $defesas = $defesas->sortByDesc(function($item){return Carbon::createFromFormat('d/m/Y', $item->data)->format('Y-m-d H:i:s');});
 
         return view("defenses.index", compact(["defesas"]));
     }
