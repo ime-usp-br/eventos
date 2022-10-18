@@ -40,7 +40,7 @@ class DefenseController extends Controller
             $defesas = Defense::whereHas("trabalho")->get();
         }
 
-        $defesas = $defesas->sortByDesc(function($item){return Carbon::createFromFormat('d/m/Y', $item->data)->format('Y-m-d H:i:s');});
+        $defesas = $defesas->sortByDesc(function($item){return $item->data ? Carbon::createFromFormat('d/m/Y', $item->data)->format('Y-m-d H:i:s') : null;});
 
         return view("defenses.index", compact(["defesas"]));
     }
