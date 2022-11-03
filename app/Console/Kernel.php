@@ -70,7 +70,7 @@ class Kernel extends ConsoleKernel
                 
                 $banca = Committee::firstOrCreate(["defesaID"=>$defesa->id]);
 
-                $query = " SELECT VP.nompes as nome, VP.codpes, R.vinptpbantrb as vinculo, P.sexpes as sexo";
+                $query = " SELECT VP.nompes as nome, VP.codpes, R.vinptpbantrb as vinculo, P.sexpes as sexo, R.staptp";
                 $query .= " FROM AGPROGRAMA as AGP, VINCULOPESSOAUSP as VP, PESSOA as P, R48PGMTRBDOC as R";
                 $query .= " WHERE AGP.codpes = :codpes";
                 $query .= " AND AGP.dtadfapgm IS NULL ";
@@ -87,12 +87,15 @@ class Kernel extends ConsoleKernel
                 $res2 = array_unique(DB::fetchAll($query, $param),SORT_REGULAR);
 
                 foreach($res2 as $r2){
-                    $membroBanca = CommitteeMember::firstOrCreate([
-                        "vinculo"=>$vinculos[$r2["vinculo"]],
-                        "nome"=>$r2["nome"],
+                    CommitteeMember::updateOrCreate([
                         "codpes"=>$r2["codpes"],
                         "bancaID"=>$banca->id,
-                        "sexo"=>$r2["sexo"]]);
+                        "nome"=>$r2["nome"],
+                        "sexo"=>$r2["sexo"],
+                    ],[
+                        "vinculo"=>$vinculos[$r2["vinculo"]],
+                        "staptp"=>$r2["staptp"] == "S" ? 1 : 0,
+                    ]);
                 }
 
                 $query = " SELECT VP.nompes as nome, VP.codpes, R.tiport as tipo, P.sexpes as sexo";

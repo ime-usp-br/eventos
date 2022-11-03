@@ -15,6 +15,7 @@ class CommitteeMember extends Model
         'nome',
         'codpes',
         'sexo',
+        'staptp',
     ];
 
     protected $hidden = [

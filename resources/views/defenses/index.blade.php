@@ -162,7 +162,7 @@
                                             </div>
                                             <div class="col-lg-auto">
                                                 @foreach($defesa->banca->membros()->where("vinculo", "Presidente")->get() as $presidente)
-                                                    {!! $presidente->nome !!}<br>
+                                                    {!! $presidente->nome.( $presidente->staptp ? " (P)" : "" ) !!}<br>
                                                 @endforeach
                                             </div>
                                         </div>
@@ -172,7 +172,7 @@
                                             </div>
                                             <div class="col-lg-auto">
                                                 @foreach($defesa->banca->membros()->where("vinculo", "Titular")->get() as $titular)
-                                                    {!! $titular->nome !!}<br>
+                                                    {!! $titular->nome.( $titular->staptp ? " (P)" : "" ) !!}<br>
                                                 @endforeach
                                             </div>
                                         </div>
@@ -182,7 +182,7 @@
                                             </div>
                                             <div class="col-lg-auto">
                                                 @foreach($defesa->banca->membros()->where("vinculo", "Suplente")->get() as $suplente)
-                                                    {!! $suplente->nome !!}<br>
+                                                    {!! $suplente->nome.( $suplente->staptp ? " (P)" : "" ) !!}<br>
                                                 @endforeach
                                             </div>
                                         </div>
@@ -193,7 +193,7 @@
                                                 </div>
                                                 <div class="col-lg-auto">
                                                     @foreach($defesa->banca->membros()->where("vinculo", "Substituto")->get() as $substituto)
-                                                        {!! $substituto->nome !!}<br>
+                                                        {!! $substituto->nome.( $suplente->staptp ? " (P)" : "" ) !!}<br>
                                                     @endforeach
                                                 </div>
                                             </div>
