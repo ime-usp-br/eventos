@@ -121,7 +121,7 @@ class Kernel extends ConsoleKernel
                     }
                 }
             }
-        })->daily();
+        })->weekdays()->hourly()->between('8:00', '18:00');
     }
 
     /**
