@@ -81,9 +81,9 @@ class EventController extends Controller
                 return -1;
             }
 
-            if(!$a->aprovado and $b->aprovado){
+            if($aVaiAcontecer and $bVaiAcontecer and !$a->aprovado and $b->aprovado){
                 return 1;
-            }elseif($a->aprovado and !$b->aprovado){
+            }elseif($aVaiAcontecer and $bVaiAcontecer and $a->aprovado and !$b->aprovado){
                 return -1;
             }
 
