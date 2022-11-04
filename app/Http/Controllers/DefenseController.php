@@ -41,7 +41,36 @@ class DefenseController extends Controller
             $defesas = Defense::whereHas("trabalho")->get();
         }
 
-        $defesas = $defesas->sortByDesc(function($item){return $item->data ? Carbon::createFromFormat('d/m/Y', $item->data)->format('Y-m-d H:i:s') : null;});
+        $defesas = $defesas->sort(function($a, $b){
+            $dataDeA = $a->data ? Carbon::createFromFormat('d/m/Y', $a->data)->format('Y-m-d') : null;
+            $dataDeB = $b->data ? Carbon::createFromFormat('d/m/Y', $b->data)->format('Y-m-d') : null;
+
+            if(($dataDeA and $dataDeA >= date("Y-m-d")) and (!$dataDeB or $dataDeB < date("Y-m-d"))){
+                return 1;
+            }elseif((!$dataDeA or $dataDeA < date("Y-m-d")) and ($dataDeB and $dataDeB >= date("Y-m-d"))){
+                return -1;
+            }
+
+            if(!$dataDeA and ($dataDeB and $dataDeB < date("Y-m-d"))){
+                return 1;
+            }elseif(($dataDeA and $dataDeA < date("Y-m-d") and !$dataDeB)){
+                return -1;
+            }
+
+            if(($dataDeA and $dataDeA < date("Y-m-d")) and ($dataDeB and $dataDeB < date("Y-m-d")) and $dataDeA > $dataDeB){
+                return 1;
+            }elseif(($dataDeA and $dataDeA < date("Y-m-d")) and ($dataDeB and $dataDeB < date("Y-m-d"))  and $dataDeA < $dataDeB){
+                return -1;
+            }
+
+            if(($dataDeA and $dataDeA >= date("Y-m-d")) and ($dataDeB and $dataDeB >= date("Y-m-d")) and $dataDeA < $dataDeB){
+                return 1;
+            }elseif(($dataDeA and $dataDeA >= date("Y-m-d")) and ($dataDeB and $dataDeB >= date("Y-m-d"))  and $dataDeA > $dataDeB){
+                return -1;
+            }
+
+
+        })->reverse();
 
         return view("defenses.index", compact(["defesas"]));
     }

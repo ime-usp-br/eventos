@@ -36,11 +36,15 @@
             @if (count($defesas) > 0)
                 @foreach($defesas as $defesa)
                     <div class="card mb-3">
-                        <div class="card-header">
+
+
+                        <div class="card-header" id="{{ 'heading-'.$defesa->id }}">
                             <div class="row justify-content-between">
                                 <div class="row justify-content-start ml-0">
                                     <div class="col-sm-auto pl-2" style="margin-top:5px;">
-                                    <b>{{$defesa->aluno->nome}}</b>
+                                    <button class="btn btn-link" data-toggle="collapse" data-target="{{ '#collapse-'.$defesa->id }}" aria-expanded="false" aria-controls="{{ 'collapse-'.$defesa->id }}">
+                                        <b>{{$defesa->aluno->nome}}</b>
+                                    </button>
                                     </div>
                                 </div>
                                 @if(Auth::user()->hasRole(["Administrador", "Moderador"]))
@@ -64,164 +68,169 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="card-body">
 
 
-                            <div class="row custom-form-group">
-                                <div class="row col-lg lg-pb-3">
-                                    <div class="col-lg-auto pr-0">
-                                        <label>Programa:</label>
-                                    </div>
-                                    <div class="col-lg-auto">
-                                    {{$defesa->programa}}
-                                    </div>
-                                </div>
-                                <div class="row col-lg">
-                                    <div class="col-lg-auto pr-0">
-                                        <label>Nível:</label>
-                                    </div>
-                                    <div class="col-lg-auto">
-                                    {!! $defesa->nivel !!}
-                                    </div>
-                                </div>
-                            </div>
+                        <div id="{{ 'collapse-'.$defesa->id }}" class="collapse" aria-labelledby="{{ 'heading-'.$defesa->id }}">
+                            <div class="card-body">
 
-                            <div class="row custom-form-group">
-                                <div class="row col-lg {{ $defesa->aluno->orientadores()->where('tipo', 'Coorientador')->exists() ? 'lg-pb-3' : '' }}">
-                                    <div class="col-lg-auto pr-0">
-                                        <label for="dataInicial">Orientador{!! count($defesa->aluno->orientadores()->where("tipo", "Orientador")->get()) > 1 ? "es" : "" !!}:</label>
-                                    </div>
-                                    <div class="col-lg-auto">
-                                        @foreach($defesa->aluno->orientadores()->where("tipo", "Orientador")->get() as $orientador)
-                                            {!! $orientador->nome !!}<br>
-                                        @endforeach
-                                    </div>
-                                </div>
-                                @if($defesa->aluno->orientadores()->where('tipo', 'Coorientador')->exists())
-                                <div class="row col-lg">
-                                    <div class="col-lg-auto pr-0">
-                                        <label for="dataInicial">Coorientador{!! count($defesa->aluno->orientadores()->where("tipo", "Coorientador")->get()) > 1 ? "es" : "" !!}:</label>
-                                    </div>
-                                    <div class="col-lg-auto">
-                                        @foreach($defesa->aluno->orientadores()->where("tipo", "Coorientador")->get() as $coorientador)
-                                            {!! $coorientador->nome !!}<br>
-                                        @endforeach
-                                    </div>
-                                </div>
-                                @endif
-                            </div>
-
-                            <div class="row custom-form-group">
-                                <div class="row col-lg lg-pb-3">
-                                    <div class="col-lg-auto pr-0">
-                                        <label for="dataInicial">Data:</label>
-                                    </div>
-                                    <div class="col-lg-auto">
-                                        {{ $defesa->data ?? "Não informado"}}
-                                    </div>
-                                </div>
-                                <div class="row col-lg lg-pb-3">
-                                    <div class="col-lg-auto pr-0">
-                                        <label for="dataFinal">Horário:</label>
-                                    </div>
-                                    <div class="col-lg-auto">
-                                        {{ $defesa->horario ?? "Não informado"}}
-                                    </div>
-                                </div>
-                                <div class="row col-lg">
-                                    <div class="col-lg-auto pr-0">
-                                        <label for="dataFinal">Local:</label>
-                                    </div>
-                                    <div class="col-lg-auto">
-                                        {{ $defesa->local->nome ?? "Não informado"}}
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row custom-form-group">
-                                <div class="row col-lg lg-pb-3">
-                                    <div class="col-lg-auto">
-                                        <label for="link">link:</label>
-                                    </div>
-                                    <div class="col-lg-auto">
-                                        {{ $defesa->link ?? "Não informado"}}
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="card mb-3">
-                                <div class="card-header">
-                                    <b>Banca</b>
-                                </div>
-
-                                <div class="card-body">
-                                    <div class="row custom-form-group">
-                                        <div class="row col-lg lg-pb-3">
-                                            <div class="col-lg-auto pr-0">
-                                                <label>Presidente:</label>
-                                            </div>
-                                            <div class="col-lg-auto">
-                                                @foreach($defesa->banca->membros()->where("vinculo", "Presidente")->get() as $membro)
-                                                    {!! $membro->nome.( $membro->staptp ? " (P) " : " " ).( $membro->instituicao->sigla ?? "" ) !!}<br>
-                                                @endforeach
-                                            </div>
+                                <div class="row custom-form-group">
+                                    <div class="row col-lg lg-pb-3">
+                                        <div class="col-lg-auto pr-0">
+                                            <label>Programa:</label>
                                         </div>
-                                        <div class="row col-lg lg-pb-3">
-                                            <div class="col-lg-auto pr-0">
-                                                <label>Titulares:</label>
-                                            </div>
-                                            <div class="col-lg-auto">
-                                                @foreach($defesa->banca->membros()->where("vinculo", "Titular")->get() as $membro)
-                                                    {!! $membro->nome.( $membro->staptp ? " (P) " : " " ).( $membro->instituicao->sigla ?? "" ) !!}<br>
-                                                @endforeach
-                                            </div>
+                                        <div class="col-lg-auto">
+                                        {{$defesa->programa}}
                                         </div>
-                                        <div class="row col-lg {{ $defesa->banca->membros()->where('vinculo', 'Substituto')->exists() ? 'lg-pb-3' : '' }}">
-                                            <div class="col-lg-auto pr-0">
-                                                <label>Suplentes:</label>
-                                            </div>
-                                            <div class="col-lg-auto">
-                                                @foreach($defesa->banca->membros()->where("vinculo", "Suplente")->get() as $membro)
-                                                    {!! $membro->nome.( $membro->staptp ? " (P) " : " " ).( $membro->instituicao->sigla ?? "" ) !!}<br>
-                                                @endforeach
-                                            </div>
+                                    </div>
+                                    <div class="row col-lg">
+                                        <div class="col-lg-auto pr-0">
+                                            <label>Nível:</label>
                                         </div>
-                                        @if($defesa->banca->membros()->where('vinculo', 'Substituto')->exists())
-                                            <div class="row col-lg">
+                                        <div class="col-lg-auto">
+                                        {!! $defesa->nivel !!}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row custom-form-group">
+                                    <div class="row col-lg {{ $defesa->aluno->orientadores()->where('tipo', 'Coorientador')->exists() ? 'lg-pb-3' : '' }}">
+                                        <div class="col-lg-auto pr-0">
+                                            <label for="dataInicial">Orientador{!! count($defesa->aluno->orientadores()->where("tipo", "Orientador")->get()) > 1 ? "es" : "" !!}:</label>
+                                        </div>
+                                        <div class="col-lg-auto">
+                                            @foreach($defesa->aluno->orientadores()->where("tipo", "Orientador")->get() as $orientador)
+                                                {!! $orientador->nome !!}<br>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                    @if($defesa->aluno->orientadores()->where('tipo', 'Coorientador')->exists())
+                                    <div class="row col-lg">
+                                        <div class="col-lg-auto pr-0">
+                                            <label for="dataInicial">Coorientador{!! count($defesa->aluno->orientadores()->where("tipo", "Coorientador")->get()) > 1 ? "es" : "" !!}:</label>
+                                        </div>
+                                        <div class="col-lg-auto">
+                                            @foreach($defesa->aluno->orientadores()->where("tipo", "Coorientador")->get() as $coorientador)
+                                                {!! $coorientador->nome !!}<br>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                    @endif
+                                </div>
+
+                                <div class="row custom-form-group">
+                                    <div class="row col-lg lg-pb-3">
+                                        <div class="col-lg-auto pr-0">
+                                            <label for="dataInicial">Data:</label>
+                                        </div>
+                                        <div class="col-lg-auto">
+                                            {{ $defesa->data ?? "Não informado"}}
+                                        </div>
+                                    </div>
+                                    <div class="row col-lg lg-pb-3">
+                                        <div class="col-lg-auto pr-0">
+                                            <label for="dataFinal">Horário:</label>
+                                        </div>
+                                        <div class="col-lg-auto">
+                                            {{ $defesa->horario ?? "Não informado"}}
+                                        </div>
+                                    </div>
+                                    <div class="row col-lg">
+                                        <div class="col-lg-auto pr-0">
+                                            <label for="dataFinal">Local:</label>
+                                        </div>
+                                        <div class="col-lg-auto">
+                                            {{ $defesa->local->nome ?? "Não informado"}}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row custom-form-group">
+                                    <div class="row col-lg lg-pb-3">
+                                        <div class="col-lg-auto">
+                                            <label for="link">link:</label>
+                                        </div>
+                                        <div class="col-lg-auto">
+                                            {{ $defesa->link ?? "Não informado"}}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card mb-3">
+                                    <div class="card-header">
+                                        <b>Banca</b>
+                                    </div>
+
+                                    <div class="card-body">
+                                        <div class="row custom-form-group">
+                                            <div class="row col-lg lg-pb-3">
                                                 <div class="col-lg-auto pr-0">
-                                                    <label>Substitutos:</label>
+                                                    <label>Presidente:</label>
                                                 </div>
                                                 <div class="col-lg-auto">
-                                                    @foreach($defesa->banca->membros()->where("vinculo", "Substituto")->get() as $membro)
-                                                    {!! $membro->nome.( $membro->staptp ? " (P) " : " " ).( $membro->instituicao->sigla ?? "" ) !!}<br>
+                                                    @foreach($defesa->banca->membros()->where("vinculo", "Presidente")->get() as $membro)
+                                                        {!! $membro->nome.( $membro->staptp ? " (P) " : " " ).( $membro->instituicao->sigla ?? "" ) !!}<br>
                                                     @endforeach
                                                 </div>
                                             </div>
-                                        @endif
+                                            <div class="row col-lg lg-pb-3">
+                                                <div class="col-lg-auto pr-0">
+                                                    <label>Titulares:</label>
+                                                </div>
+                                                <div class="col-lg-auto">
+                                                    @foreach($defesa->banca->membros()->where("vinculo", "Titular")->get() as $membro)
+                                                        {!! $membro->nome.( $membro->staptp ? " (P) " : " " ).( $membro->instituicao->sigla ?? "" ) !!}<br>
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                            <div class="row col-lg {{ $defesa->banca->membros()->where('vinculo', 'Substituto')->exists() ? 'lg-pb-3' : '' }}">
+                                                <div class="col-lg-auto pr-0">
+                                                    <label>Suplentes:</label>
+                                                </div>
+                                                <div class="col-lg-auto">
+                                                    @foreach($defesa->banca->membros()->where("vinculo", "Suplente")->get() as $membro)
+                                                        {!! $membro->nome.( $membro->staptp ? " (P) " : " " ).( $membro->instituicao->sigla ?? "" ) !!}<br>
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                            @if($defesa->banca->membros()->where('vinculo', 'Substituto')->exists())
+                                                <div class="row col-lg">
+                                                    <div class="col-lg-auto pr-0">
+                                                        <label>Substitutos:</label>
+                                                    </div>
+                                                    <div class="col-lg-auto">
+                                                        @foreach($defesa->banca->membros()->where("vinculo", "Substituto")->get() as $membro)
+                                                        {!! $membro->nome.( $membro->staptp ? " (P) " : " " ).( $membro->instituicao->sigla ?? "" ) !!}<br>
+                                                        @endforeach
+                                                    </div>
+                                                </div>
+                                            @endif
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="card mb-3">
-                                <div class="card-header">
-                                    <b>{!! $defesa->nivel == "Mestrado" ? "Dissertação" : "Tese" !!}</b>
-                                </div>
-
-                                <div class="card-body">
-                                    <div class="custom-form-group">
-                                        <label for="titulo">Título:</label> {!! $defesa->trabalho ? $defesa->trabalho->titulo : ( $defesa->nivel == "Mestrado" ? "Dissertação " : "Tese " ) . "não encontrada." !!}
+                                <div class="card mb-3">
+                                    <div class="card-header">
+                                        <b>{!! $defesa->nivel == "Mestrado" ? "Dissertação" : "Tese" !!}</b>
                                     </div>
 
-                                    <div class="custom-form-group">
-                                        <label for="titulo">Resumo:</label> {!! $defesa->trabalho ? $defesa->trabalho->resumo : ( $defesa->nivel == "Mestrado" ? "Dissertação " : "Tese " ) . "não encontrada." !!}
-                                    </div>
+                                    <div class="card-body">
+                                        <div class="custom-form-group">
+                                            <label for="titulo">Título:</label> {!! $defesa->trabalho ? $defesa->trabalho->titulo : ( $defesa->nivel == "Mestrado" ? "Dissertação " : "Tese " ) . "não encontrada." !!}
+                                        </div>
 
-                                    <div class="custom-form-group">
-                                        <label for="titulo">Palavras-chave:</label> {!! $defesa->trabalho ? $defesa->trabalho->palavrasChave : ( $defesa->nivel == "Mestrado" ? "Dissertação " : "Tese " ) . "não encontrada." !!}
+                                        <div class="custom-form-group">
+                                            <label for="titulo">Resumo:</label> {!! $defesa->trabalho ? $defesa->trabalho->resumo : ( $defesa->nivel == "Mestrado" ? "Dissertação " : "Tese " ) . "não encontrada." !!}
+                                        </div>
+
+                                        <div class="custom-form-group">
+                                            <label for="titulo">Palavras-chave:</label> {!! $defesa->trabalho ? $defesa->trabalho->palavrasChave : ( $defesa->nivel == "Mestrado" ? "Dissertação " : "Tese " ) . "não encontrada." !!}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+
                     </div>
                 @endforeach
             @else
