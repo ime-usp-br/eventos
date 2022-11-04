@@ -104,14 +104,6 @@
                     <div class="card-body">
 
                         <div class="row custom-form-group">
-                            <div class="row col-lg lg-pb-3">
-                                <div class="col-lg-auto pr-0">
-                                    <label>Programa:</label>
-                                </div>
-                                <div class="col-lg-auto">
-                                {{$defesa->programa}}
-                                </div>
-                            </div>
                             <div class="row col-lg {{ $defesa->aluno->orientadores()->where('tipo', 'Coorientador')->exists() ? 'lg-pb-3' : '' }}">
                                 <div class="col-lg-auto pr-0">
                                     <label for="dataInicial">Orientador{!! count($defesa->aluno->orientadores()->where("tipo", "Orientador")->get()) > 1 ? "es" : "" !!}:</label>
@@ -134,6 +126,17 @@
                                 </div>
                             </div>
                             @endif
+                        </div>
+
+                        <div class="row custom-form-group">
+                            <div class="row col-lg lg-pb-3">
+                                <div class="col-lg-auto pr-0">
+                                    <label>Programa:</label>
+                                </div>
+                                <div class="col-lg-auto">
+                                {{$defesa->programa}}
+                                </div>
+                            </div>
                         </div>
 
                         <div class="row custom-form-group">
