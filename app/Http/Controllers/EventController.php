@@ -57,7 +57,48 @@ class EventController extends Controller
             $eventos = $eventos->where("cadastradorID", Auth::user()->id);
         }
 
-        $eventos = $eventos->sortByDesc(function($item){return Carbon::createFromFormat('d/m/Y', $item->dataInicial)->format('Y-m-d H:i:s');});
+        $eventos = $eventos->sort(function($a,$b){
+            $dataInitDeA = Carbon::createFromFormat("d/m/Y", $a->dataInicial)->format("Y-m-d");
+            $dataInitDeB = Carbon::createFromFormat("d/m/Y", $b->dataInicial)->format("Y-m-d");
+            $dataFimDeA = $a->dataFinal ? Carbon::createFromFormat("d/m/Y", $a->dataFinal)->format("Y-m-d") : null;
+            $dataFimDeB = $b->dataFinal ? Carbon::createFromFormat("d/m/Y", $b->dataFinal)->format("Y-m-d") : null;
+            
+            if($a->dataFinal){
+                $aVaiAcontecer = $dataFimDeA >= date("Y-m-d") ? 1 : 0;
+            }else{
+                $aVaiAcontecer = $dataInitDeA >= date("Y-m-d") ? 1 : 0;
+            }
+
+            if($b->dataFinal){
+                $bVaiAcontecer = $dataFimDeB >= date("Y-m-d") ? 1 : 0;
+            }else{
+                $bVaiAcontecer = $dataInitDeB >= date("Y-m-d") ? 1 : 0;
+            }
+
+            if($aVaiAcontecer and !$bVaiAcontecer){
+                return 1;
+            }elseif(!$aVaiAcontecer and $bVaiAcontecer){
+                return -1;
+            }
+
+            if(!$a->aprovado and $b->aprovado){
+                return 1;
+            }elseif($a->aprovado and !$b->aprovado){
+                return -1;
+            }
+
+            if($aVaiAcontecer and $bVaiAcontecer and $dataInitDeA < $dataInitDeB){
+                return 1;
+            }elseif($aVaiAcontecer and $bVaiAcontecer and $dataInitDeA > $dataInitDeB){
+                return -1;
+            }
+
+            if(!$aVaiAcontecer and !$bVaiAcontecer and $dataInitDeA > $dataInitDeB){
+                return 1;
+            }elseif(!$aVaiAcontecer and !$bVaiAcontecer and $dataInitDeA < $dataInitDeB){
+                return -1;
+            }
+        })->reverse();
         
         return view("events.index", compact(["eventos"]));
     }
