@@ -25,6 +25,7 @@ class CommitteeMember extends Model
         'id',
         'codpes',
         'bancaID',
+        'instituicaoID',
         "created_at",
         "updated_at",
     ];

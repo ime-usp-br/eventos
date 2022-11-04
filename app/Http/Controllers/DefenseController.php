@@ -121,12 +121,14 @@ class DefenseController extends Controller
             $membro->save();
         }
 
-        foreach($validated["instituicoes"] as $id=>$values){
-            $membro = $defense->banca->membros()->where("id", $id)->first();
-            if($membro){
-                $instituicao = Institution::firstOrCreate($values);
-                $membro->instituicao()->associate($instituicao);
-                $membro->save();
+        if(isset($validated["instituicoes"])){
+            foreach($validated["instituicoes"] as $id=>$values){
+                $membro = $defense->banca->membros()->where("id", $id)->first();
+                if($membro){
+                    $instituicao = Institution::firstOrCreate($values);
+                    $membro->instituicao()->associate($instituicao);
+                    $membro->save();
+                }
             }
         }
 
