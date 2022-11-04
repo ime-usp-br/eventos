@@ -161,8 +161,8 @@
                                                 <label>Presidente:</label>
                                             </div>
                                             <div class="col-lg-auto">
-                                                @foreach($defesa->banca->membros()->where("vinculo", "Presidente")->get() as $presidente)
-                                                    {!! $presidente->nome.( $presidente->staptp ? " (P)" : "" ) !!}<br>
+                                                @foreach($defesa->banca->membros()->where("vinculo", "Presidente")->get() as $membro)
+                                                    {!! $membro->nome.( $membro->staptp ? " (P) " : " " ).( $membro->instituicao->sigla ?? "" ) !!}<br>
                                                 @endforeach
                                             </div>
                                         </div>
@@ -171,8 +171,8 @@
                                                 <label>Titulares:</label>
                                             </div>
                                             <div class="col-lg-auto">
-                                                @foreach($defesa->banca->membros()->where("vinculo", "Titular")->get() as $titular)
-                                                    {!! $titular->nome.( $titular->staptp ? " (P)" : "" ) !!}<br>
+                                                @foreach($defesa->banca->membros()->where("vinculo", "Titular")->get() as $membro)
+                                                    {!! $membro->nome.( $membro->staptp ? " (P) " : " " ).( $membro->instituicao->sigla ?? "" ) !!}<br>
                                                 @endforeach
                                             </div>
                                         </div>
@@ -181,8 +181,8 @@
                                                 <label>Suplentes:</label>
                                             </div>
                                             <div class="col-lg-auto">
-                                                @foreach($defesa->banca->membros()->where("vinculo", "Suplente")->get() as $suplente)
-                                                    {!! $suplente->nome.( $suplente->staptp ? " (P)" : "" ) !!}<br>
+                                                @foreach($defesa->banca->membros()->where("vinculo", "Suplente")->get() as $membro)
+                                                    {!! $membro->nome.( $membro->staptp ? " (P) " : " " ).( $membro->instituicao->sigla ?? "" ) !!}<br>
                                                 @endforeach
                                             </div>
                                         </div>
@@ -192,8 +192,8 @@
                                                     <label>Substitutos:</label>
                                                 </div>
                                                 <div class="col-lg-auto">
-                                                    @foreach($defesa->banca->membros()->where("vinculo", "Substituto")->get() as $substituto)
-                                                        {!! $substituto->nome.( $suplente->staptp ? " (P)" : "" ) !!}<br>
+                                                    @foreach($defesa->banca->membros()->where("vinculo", "Substituto")->get() as $membro)
+                                                    {!! $membro->nome.( $membro->staptp ? " (P) " : " " ).( $membro->instituicao->sigla ?? "" ) !!}<br>
                                                     @endforeach
                                                 </div>
                                             </div>

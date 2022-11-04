@@ -28,6 +28,9 @@ class UpdateDefenseRequest extends FormRequest
             "data" => "required|date_format:d/m/Y",
             "horario" => "required|date_format:H:i",
             "link" => "sometimes",
+            'instituicoes' => 'sometimes|array',
+            'instituicoes.*.sigla' => 'required',
+            'instituicoes.*.nome' => 'sometimes',
         ];
     }
 

@@ -8,6 +8,7 @@ use App\Http\Requests\IndexDefenseRequest;
 use App\Models\Defense;
 use Uspdev\Replicado\DB;
 use App\Models\Location;
+use App\Models\Institution;
 use Carbon\Carbon;
 use Auth;
 
@@ -114,6 +115,20 @@ class DefenseController extends Controller
         }
 
         $validated = $request->validated();
+
+        foreach($defense->banca->membros as $membro){
+            $membro->instituicao()->disassociate();
+            $membro->save();
+        }
+
+        foreach($validated["instituicoes"] as $id=>$values){
+            $membro = $defense->banca->membros()->where("id", $id)->first();
+            if($membro){
+                $instituicao = Institution::firstOrCreate($values);
+                $membro->instituicao()->associate($instituicao);
+                $membro->save();
+            }
+        }
 
         $validated["localID"] = Location::firstOrCreate(["nome"=>$validated["local"]])->id;
         unset($validated["local"]);

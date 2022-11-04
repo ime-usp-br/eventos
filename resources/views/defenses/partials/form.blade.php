@@ -120,8 +120,31 @@
                     <label>Presidente:</label>
                 </div>
                 <div class="col-lg-auto">
-                    @foreach($defesa->banca->membros()->where("vinculo", "Presidente")->get() as $presidente)
-                        {!! $presidente->nome.( $presidente->staptp ? " (P)" : "" ) !!}<br>
+                    @foreach($defesa->banca->membros()->where("vinculo", "Presidente")->get() as $membro)
+                        <div class="row">
+                            <div class="pl-3" id="{{ 'membro-'.$membro->id }}">
+                                {!! $membro->nome.( $membro->staptp ? " (P)" : "" ) !!}
+                            </div>
+                            <div id="{{ 'membro-'.$membro->id.'-instituicao' }}">
+                                @if($membro->instituicao)
+                                    <input id="{{ 'instituicoes['.$membro->id.'][nome]' }}" name="{{ 'instituicoes['.$membro->id.'][nome]' }}" type="hidden" value="{{ $membro->instituicao->nome }}">
+                                    <input id="{{ 'instituicoes['.$membro->id.'][sigla]' }}" name="{{ 'instituicoes['.$membro->id.'][sigla]' }}" type="hidden" value="{{ $membro->instituicao->sigla }}">
+                                    <label id="label-institution-'+member_id+'" class="pl-2 font-weight-normal">{{ $membro->instituicao->sigla }}</label>
+                                    <a class="btn btn-link btn-sm text-dark text-decoration-none"
+                                        id="btn-remove-institution-'+member_id+'" style="position:relative;top:-3px;"
+                                        onclick="{{ 'removeInstitution(\''.$membro->id.'\')' }}"
+                                    >
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
+                                @else
+                                    <a class="btn btn-link btn-sm text-dark text-decoration-none" id="btn-addInstitution" 
+                                        data-toggle="modal" data-target="#addInstitutionModal" data-id="{{$membro->id}}" style="position:relative;top:-3px;"
+                                        title="Adicionar Instituição">
+                                        <i class="fas fa-plus-circle"></i>
+                                    </a>
+                                @endif
+                            </div>
+                        </div>
                     @endforeach
                 </div>
             </div>
@@ -130,8 +153,31 @@
                     <label>Titulares:</label>
                 </div>
                 <div class="col-lg-auto">
-                    @foreach($defesa->banca->membros()->where("vinculo", "Titular")->get() as $titular)
-                        {!! $titular->nome.( $titular->staptp ? " (P)" : "" ) !!}<br>
+                    @foreach($defesa->banca->membros()->where("vinculo", "Titular")->get() as $membro)
+                        <div class="row">
+                            <div class="pl-3" id="{{ 'membro-'.$membro->id }}">
+                                {!! $membro->nome.( $membro->staptp ? " (P)" : "" ) !!}
+                            </div>
+                            <div id="{{ 'membro-'.$membro->id.'-instituicao' }}">
+                                @if($membro->instituicao)
+                                    <input id="{{ 'instituicoes['.$membro->id.'][nome]' }}" name="{{ 'instituicoes['.$membro->id.'][nome]' }}" type="hidden" value="{{ $membro->instituicao->nome }}">
+                                    <input id="{{ 'instituicoes['.$membro->id.'][sigla]' }}" name="{{ 'instituicoes['.$membro->id.'][sigla]' }}" type="hidden" value="{{ $membro->instituicao->sigla }}">
+                                    <label id="label-institution-'+member_id+'" class="pl-2 font-weight-normal">{{ $membro->instituicao->sigla }}</label>
+                                    <a class="btn btn-link btn-sm text-dark text-decoration-none"
+                                        id="btn-remove-institution-'+member_id+'" style="position:relative;top:-3px;"
+                                        onclick="{{ 'removeInstitution(\''.$membro->id.'\')' }}"
+                                    >
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
+                                @else
+                                    <a class="btn btn-link btn-sm text-dark text-decoration-none" id="btn-addInstitution" 
+                                        data-toggle="modal" data-target="#addInstitutionModal" data-id="{{$membro->id}}" style="position:relative;top:-3px;"
+                                        title="Adicionar Instituição">
+                                        <i class="fas fa-plus-circle"></i>
+                                    </a>
+                                @endif
+                            </div>
+                        </div>
                     @endforeach
                 </div>
             </div>
@@ -140,8 +186,31 @@
                     <label>Suplentes:</label>
                 </div>
                 <div class="col-lg-auto">
-                    @foreach($defesa->banca->membros()->where("vinculo", "Suplente")->get() as $suplente)
-                        {!! $suplente->nome.( $suplente->staptp ? " (P)" : "" ) !!}<br>
+                    @foreach($defesa->banca->membros()->where("vinculo", "Suplente")->get() as $membro)
+                        <div class="row">
+                            <div class="pl-3" id="{{ 'membro-'.$membro->id }}">
+                                {!! $membro->nome.( $membro->staptp ? " (P)" : "" ) !!}
+                            </div>
+                            <div id="{{ 'membro-'.$membro->id.'-instituicao' }}">
+                                @if($membro->instituicao)
+                                    <input id="{{ 'instituicoes['.$membro->id.'][nome]' }}" name="{{ 'instituicoes['.$membro->id.'][nome]' }}" type="hidden" value="{{ $membro->instituicao->nome }}">
+                                    <input id="{{ 'instituicoes['.$membro->id.'][sigla]' }}" name="{{ 'instituicoes['.$membro->id.'][sigla]' }}" type="hidden" value="{{ $membro->instituicao->sigla }}">
+                                    <label id="label-institution-'+member_id+'" class="pl-2 font-weight-normal">{{ $membro->instituicao->sigla }}</label>
+                                    <a class="btn btn-link btn-sm text-dark text-decoration-none"
+                                        id="btn-remove-institution-'+member_id+'" style="position:relative;top:-3px;"
+                                        onclick="{{ 'removeInstitution(\''.$membro->id.'\')' }}"
+                                    >
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
+                                @else
+                                    <a class="btn btn-link btn-sm text-dark text-decoration-none" id="btn-addInstitution" 
+                                        data-toggle="modal" data-target="#addInstitutionModal" data-id="{{$membro->id}}" style="position:relative;top:-3px;"
+                                        title="Adicionar Instituição">
+                                        <i class="fas fa-plus-circle"></i>
+                                    </a>
+                                @endif
+                            </div>
+                        </div>
                     @endforeach
                 </div>
             </div>
@@ -151,8 +220,31 @@
                         <label>Substitutos:</label>
                     </div>
                     <div class="col-lg-auto">
-                        @foreach($defesa->banca->membros()->where("vinculo", "Substituto")->get() as $substituto)
-                            {!! $substituto->nome.( $substituto->staptp ? " (P)" : "" ) !!}<br>
+                        @foreach($defesa->banca->membros()->where("vinculo", "Substituto")->get() as $membro)
+                        <div class="row">
+                            <div class="pl-3" id="{{ 'membro-'.$membro->id }}">
+                                {!! $membro->nome.( $membro->staptp ? " (P)" : "" ) !!}
+                            </div>
+                            <div id="{{ 'membro-'.$membro->id.'-instituicao' }}">
+                                @if($membro->instituicao)
+                                    <input id="{{ 'instituicoes['.$membro->id.'][nome]' }}" name="{{ 'instituicoes['.$membro->id.'][nome]' }}" type="hidden" value="{{ $membro->instituicao->nome }}">
+                                    <input id="{{ 'instituicoes['.$membro->id.'][sigla]' }}" name="{{ 'instituicoes['.$membro->id.'][sigla]' }}" type="hidden" value="{{ $membro->instituicao->sigla }}">
+                                    <label id="label-institution-'+member_id+'" class="pl-2 font-weight-normal">{{ $membro->instituicao->sigla }}</label>
+                                    <a class="btn btn-link btn-sm text-dark text-decoration-none"
+                                        id="btn-remove-institution-'+member_id+'" style="position:relative;top:-3px;"
+                                        onclick="{{ 'removeInstitution(\''.$membro->id.'\')' }}"
+                                    >
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
+                                @else
+                                    <a class="btn btn-link btn-sm text-dark text-decoration-none" id="btn-addInstitution" 
+                                        data-toggle="modal" data-target="#addInstitutionModal" data-id="{{$membro->id}}" style="position:relative;top:-3px;"
+                                        title="Adicionar Instituição">
+                                        <i class="fas fa-plus-circle"></i>
+                                    </a>
+                                @endif
+                            </div>
+                        </div>
                         @endforeach
                     </div>
                 </div>
