@@ -69,7 +69,11 @@ class DefenseController extends Controller
                 return -1;
             }
 
-
+            if($a->aluno->nome < $b->aluno->nome){
+                return 1;
+            }elseif($a->aluno->nome > $b->aluno->nome){
+                return -1;
+            }
         })->reverse();
 
         return view("defenses.index", compact(["defesas"]));
