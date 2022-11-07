@@ -38,13 +38,11 @@
                     <div class="card mb-3">
 
 
-                        <div class="card-header" id="{{ 'heading-'.$defesa->id }}">
+                        <div class="card-header" data-toggle="collapse"  class="accordion-toggle" data-target="{{ '#collapse-'.$defesa->id }}">
                             <div class="row justify-content-between">
                                 <div class="row justify-content-start ml-0">
                                     <div class="col-sm-auto pl-2" style="margin-top:5px;">
-                                    <button class="btn btn-link" data-toggle="collapse" data-target="{{ '#collapse-'.$defesa->id }}" aria-expanded="false" aria-controls="{{ 'collapse-'.$defesa->id }}">
                                         <b>{{$defesa->aluno->nome}}</b>
-                                    </button>
                                     </div>
                                 </div>
                                 @if(Auth::user()->hasRole(["Administrador", "Moderador"]))
@@ -70,7 +68,7 @@
                         </div>
 
 
-                        <div id="{{ 'collapse-'.$defesa->id }}" class="collapse" aria-labelledby="{{ 'heading-'.$defesa->id }}">
+                        <div id="{{ 'collapse-'.$defesa->id }}" class="collapse">
                             <div class="card-body">
 
                                 <div class="row custom-form-group">
