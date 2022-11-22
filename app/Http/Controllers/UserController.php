@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Requests\UpdateUserRequest;
+use App\Models\GoogleCalendar;
+use Auth;
+use Session;
 
 class UserController extends Controller
 {
@@ -17,12 +20,22 @@ class UserController extends Controller
      */
     public function index()
     {
-        if(!Gate::allows('editar usuario')){
-            abort(403);
+        if(Auth::check()){
+            if(!Gate::allows('editar usuario')){
+                abort(403);
+            }
+        }else{
+            return redirect("login");
         }
         
         $users = User::all();
         $roles = Role::all();
+
+        $gc = GoogleCalendar::latest("updated_at")->first();
+
+        if(!$gc){
+            Session::flash("alert-warning","Não foi encontrada nenhuma conta Google para divulgação dos eventos na agenda.");
+        }
 
         return view('users.index', compact('users', 'roles'));
     }

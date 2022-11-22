@@ -17,6 +17,7 @@ use App\Models\Attachment;
 use App\Models\User;
 use App\Models\Location;
 use App\Models\Kind;
+use App\Models\GoogleCalendar;
 use Carbon\Carbon;
 use Auth;
 
@@ -156,12 +157,30 @@ class EventController extends Controller
             $attachment->save();
         }
 
-        $moderadores = User::whereHas("roles", function($query){$query->where("name","Moderador");})->get();
+        if(Auth::user()->hasRole(["Administrador", "Moderador", "Operador"])){
+            $evento->aprovado = true;
+            $evento->save();
 
-        if($moderadores){
-            foreach($moderadores as $moderador){
-                Mail::to($moderador->email)->send(new NotifyModeratorAboutEvent($moderador, $evento,
-                    URL::signedRoute("events.show", ["event"=>$evento->id])));
+            $gc = GoogleCalendar::latest("updated_at")->first();
+    
+            if($gc){
+                $service = $gc->getGoogleService();
+                if($service){
+                    $e = $service->events->insert($gc->agendaId, $evento->getGoogleEvent());
+        
+                    $evento->googleAgendaId = $gc->agendaId;
+                    $evento->googleEventoId = $e->getId();
+                    $evento->save();
+                }
+            }            
+        }else{
+            $moderadores = User::whereHas("roles", function($query){$query->where("name","Moderador");})->get();
+    
+            if($moderadores){
+                foreach($moderadores as $moderador){
+                    Mail::to($moderador->email)->send(new NotifyModeratorAboutEvent($moderador, $evento,
+                        URL::signedRoute("events.show", ["event"=>$evento->id])));
+                }
             }
         }
 
@@ -265,8 +284,26 @@ class EventController extends Controller
             }
         }        
 
-
         $event->update($validated);
+        
+        if($event->aprovado){
+            $gc = GoogleCalendar::latest("updated_at")->first();
+    
+            if($gc){
+                $service = $gc->getGoogleService();
+                if($service){
+                    if($event->googleEventoId){
+                        $e = $service->events->update($gc->agendaId, $event->googleEventoId, $event->getGoogleEvent());
+                    }else{
+                        $e = $service->events->insert($gc->agendaId, $event->getGoogleEvent());
+            
+                        $event->googleAgendaId = $gc->agendaId;
+                        $event->googleEventoId = $e->getId();
+                        $event->save();
+                    }
+                }
+            }
+        }
 
         return redirect("/events");
     }
@@ -293,6 +330,17 @@ class EventController extends Controller
             $anexo->delete();
         }
 
+        if($event->googleEventoId){
+            $gc = GoogleCalendar::latest("updated_at")->first();
+    
+            if($gc){
+                $service = $gc->getGoogleService();
+                if($service){
+                    $service->events->delete($gc->agendaId, $event->googleEventoId);                
+                }
+            }
+        }
+
         $event->delete();
 
         return redirect("/events");
@@ -308,6 +356,19 @@ class EventController extends Controller
         }
 
         $event->save();
+
+        $gc = GoogleCalendar::latest("updated_at")->first();
+    
+        if($gc){
+            $service = $gc->getGoogleService();
+            if($service){
+                $e = $service->events->insert($gc->agendaId, $event->getGoogleEvent());
+    
+                $event->googleAgendaId = $gc->agendaId;
+                $event->googleEventoId = $e->getId();
+                $event->save();
+            }
+        }
 
         $validated = $request->validate(["sendUserEmail"=>"required|bool"]);
 
@@ -325,6 +386,21 @@ class EventController extends Controller
         $event->moderadorID = null;
 
         $event->save();
+
+        if($event->googleEventoId){
+            $gc = GoogleCalendar::latest("updated_at")->first();
+    
+            if($gc){
+                $service = $gc->getGoogleService();
+                if($service){
+                    $service->events->delete($gc->agendaId, $event->googleEventoId);          
+
+                    $event->googleEventoId = null;
+                    $event->googleAgendaId = null;
+                    $event->save();    
+                }
+            }
+        }
 
         return back();
     }

@@ -34,6 +34,8 @@ class Event extends Model
         'dataAprovacao',
         'modalidadeID',
         'tipoID',
+        'googleAgendaId',
+        'googleEventoId'
     ];
 
     protected $casts = [
@@ -141,5 +143,36 @@ class Event extends Model
     public function moderador()
     {
         return $this->belongsTo(User::class, "moderadorID");
+    }
+
+    public function getGoogleEvent()
+    {
+        $start = Carbon::createFromFormat("d/m/Y-H:i", $this->dataInicial."-".$this->horarioInicial)->format("Y-m-d\\TH:i:s")."-03:00";
+        if($this->horarioFinal){
+            $end = Carbon::createFromFormat("d/m/Y-H:i", $this->dataInicial."-".$this->horarioFinal)->format("Y-m-d\\TH:i:s")."-03:00";
+        }else{
+            $end = Carbon::createFromFormat("d/m/Y-H:i", $this->dataInicial."-".$this->horarioInicial)->format("Y-m-d\\TH:i:s")."-03:00";
+        }
+
+        $evento_array = array(
+            'summary' => $this->titulo,
+            'description' => $this->descricao,
+            'start' => array(
+              'dateTime' => $start,
+              'timeZone' => 'America/Sao_Paulo',
+            ),
+            'end' => array(
+              'dateTime' => $end,
+              'timeZone' => 'America/Sao_Paulo',
+            ),
+        );
+
+        if($this->dataFinal){
+            $evento_array["recurrence"] = [
+                "RRULE:FREQ=WEEKLY;WKST=SU;UNTIL=".Carbon::createFromFormat("d/m/Y", $this->dataFinal)->format("Ymd\\T235959\\Z").";BYDAY=FR,MO,TH,TU,WE",
+            ];
+        }
+        
+        return new \Google\Service\Calendar\Event($evento_array);
     }
 }

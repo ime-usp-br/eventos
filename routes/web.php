@@ -6,6 +6,7 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\AttachmentController;
 use App\Http\Controllers\ApiController;
 use App\Http\Controllers\DefenseController;
+use App\Http\Controllers\GoogleController;
 
 
 /*
@@ -36,3 +37,6 @@ Route::get("/api/eventos", [ApiController::class, "getAllEvents"]);
 Route::get("/api/defesas", [ApiController::class, "getAllDefenses"]);
 
 Route::resource("defenses", DefenseController::class);
+
+Route::get("/google/login", [GoogleController::class, "login"])->name("google.login");
+Route::get("/google/callback", [GoogleController::class, "callback"]);

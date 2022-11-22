@@ -9,6 +9,17 @@
         <div class="col-md-12">
             <h1 class='text-center mb-5'>Usuários</h1>
 
+            <div class="d-flex justify-content-end">
+                <div class="px-1 py-2">
+                    <a  class="btn btn-outline-primary"
+                        title="Fazer Login com Conta do Google" 
+                        href="{{ route('google.login') }}"
+                    >
+                        Login
+                        <i class="fab fa-google pr-0"></i>oogle
+                    </a>
+                </div>
+            </div>
             @if (count($users) > 0)
                 <table class="table table-bordered table-striped table-hover">
                     <tr>
