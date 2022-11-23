@@ -1,9 +1,19 @@
 <div class="custom-form-group">
-        <label for="titulo">Título*:</label>
-        <input class="custom-form-control" type="text" name="titulo" id="titulo"
+        <label for="titulo">Título (nome do evento com o título da apresentação) *:</label>
+        <input class="custom-form-control" type="text" name="titulo" id="titulo" placeholder="Exemplo: Colóquio do IME: O cérebro probabilístico "
             value="{{ old('titulo') ?? $evento->titulo ?? ''}}"
         />
 </div>
+
+
+<div class="custom-form-group">
+    <label for="nomeOrganizador">Nome do apresentador *:</label>
+    <input class="custom-form-control" type="text" name="nomeOrganizador" id="nomeOrganizador" placeholder="Exemplo: Prof. Antonio Galves"
+        value="{{ old('nomeOrganizador') ?? $evento->nomeOrganizador ?? ''}}"
+    />
+</div>
+
+
 
 <div class="row custom-form-group">
     <div class="col-lg lg-pb-3">
@@ -42,9 +52,8 @@
             />
         </div>
     </div>
-</div>
 
-<div class="row custom-form-group">
+
     <div class="col-lg lg-pb-3">
         <label for="local">Local*:</label>
         <a  class="text-dark text-decoration-none"
@@ -63,13 +72,10 @@
             </select>
         </div>
     </div>
-    <div class="col-lg">
-        <label for="nomeOrganizador">Nome do Organizador*:</label>
-        <input class="custom-form-control" type="text" name="nomeOrganizador" id="nomeOrganizador"
-            value="{{ old('nomeOrganizador') ?? $evento->nomeOrganizador ?? ''}}"
-        />
-    </div>
+
+
 </div>
+
 
 <div class="row custom-form-group">
     <div class="col-lg lg-pb-3">

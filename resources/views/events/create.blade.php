@@ -10,7 +10,7 @@
             <div class="card">
                 <div class="card-header">
                     <b>
-                        Cadastrar Novo Evento
+                        Cadastro de novo evento
                     </b>
                 </div>
                 <div class="card-body">
