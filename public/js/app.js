@@ -3,7 +3,17 @@ $(function(){
       date: false,
       format: 'HH:mm',
       shortTime: false,
-      clearButton: true
+      clearButton: false,
+      
+      currentDate: '00:00:00 AM',
+      nowButton: false,
+      switchOnClick: true,
+      cancelText: 'Cancelar',
+      minuteStep: 10,
+      showMeridian: false,
+      explicitMode: true,
+      changeMinute: 10,
+      
     }); 
     $('.custom-datepicker').datepicker({
       showOn: 'both',
