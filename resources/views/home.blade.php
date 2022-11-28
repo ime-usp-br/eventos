@@ -16,26 +16,26 @@
         @endphp
 
         @if($eventos->isNotEmpty() or $defesas->isNotEmpty())
-          <h1 class='text-center mb-5'>Próximas defesas e eventos</h1>
+          <h1 class='text-center mb-5 page-title'>Próximas defesas e eventos</h1>
 
           <table class="table table-bordered table-hover" style="font-size:12px;">
             <tr style="background-color: rgba(0,0,0,.075);vertical-align: middle;text-align: center;">
               <th style="width:800px;"><b>Titulo</b></th>
-              <th>Autor/Organizador</th>
+              <th class="d-none d-sm-table-cell">Autor/Organizador</th>
               <th>Tipo</th>
               <th>Data</th>
               <th>Horário</th>
-              <th>Local</th>
+              <th class="d-none d-sm-table-cell">Local</th>
             </tr>
 
             @foreach($eventos as $evento)
               <tr data-toggle="collapse"  class="accordion-toggle" data-target="{{ '#collapse-evento'.$evento->id }}">
                 <td>{!! $evento->titulo !!}</td>
-                <td>{{ $evento->nomeOrganizador }}</td>
+                <td class="d-none d-sm-table-cell">{{ $evento->nomeOrganizador }}</td>
                 <td>{{ $evento->tipo->nome }}</td>
                 <td style="vertical-align: middle;text-align: center;">{{ $evento->dataInicial . ( $evento->dataFinal ? " à " . $evento->dataFinal : "") }}</td>
                 <td style="vertical-align: middle;text-align: center;">{{ $evento->horarioInicial . ( $evento->horarioFinal ? " às " . $evento->horarioFinal : "" ) }}</td>
-                <td>{{ $evento->local->nome }}</td>
+                <td class="d-none d-sm-table-cell">{{ $evento->local->nome }}</td>
               </tr>
 
               <tr>
@@ -44,6 +44,28 @@
 
                   <div class="card mb-3">
                         <div class="card-body">
+
+                            <div class="d-block d-sm-none">
+                                <div class="row custom-form-group ">
+                                    <div class="row col-lg lg-pb-3">
+                                        <div class="col-lg-auto pr-0">
+                                            <label>Autor/Organizador:</label>
+                                        </div>
+                                        <div class="col-lg-auto">
+                                        {{ $evento->nomeOrganizador }}
+                                        </div>
+                                    </div>
+                                    <div class="row col-lg">
+                                        <div class="col-lg-auto pr-0">
+                                            <label>Local:</label>
+                                        </div>
+                                        <div class="col-lg-auto">
+                                        {{ $evento->local->nome }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="row custom-form-group">
                                 <div class="col-lg lg-pb-3">
                                     <label for="exigeInscricao">Exige Inscrição:</label> {{ $evento->exigeInscricao ? 'Sim' : 'Não' }}
@@ -88,11 +110,11 @@
             @foreach($defesas as $defesa)
               <tr data-toggle="collapse"  class="accordion-toggle" data-target="{{ '#collapse-defesa'.$defesa->id }}">
                 <td>{!! $defesa->trabalho->titulo !!} </td>
-                <td>{{ $defesa->aluno->nome }}</td>
+                <td class="d-none d-sm-table-cell">{{ $defesa->aluno->nome }}</td>
                 <td>{{ str_contains($defesa->nivel, "Doutorado") ? "Defesa de Doutorado" : "Defesa de Mestrado" }}</td>
                 <td style="vertical-align: middle;text-align: center;">{{ $defesa->data }}</td>
                 <td style="vertical-align: middle;text-align: center;">{{ $defesa->horario }}</td>
-                <td>{{ $defesa->local->nome }}</td>
+                <td class="d-none d-sm-table-cell">{{ $defesa->local->nome }}</td>
               </tr>
 
               <tr>
@@ -102,6 +124,19 @@
 
                   <div class="card mb-3">
                     <div class="card-body">
+
+                        <div class="d-block d-sm-none">
+                            <div class="row custom-form-group ">
+                                <div class="row col-lg">
+                                    <div class="col-lg-auto pr-0">
+                                        <label>{{ $defesa->aluno->sexo == "F" ? "Candidata:" : "Candidato:"}}</label>
+                                    </div>
+                                    <div class="col-lg-auto">
+                                    {{ $defesa->aluno->nome }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                         <div class="row custom-form-group">
                             <div class="row col-lg {{ $defesa->aluno->orientadores()->where('tipo', 'Coorientador')->exists() ? 'lg-pb-3' : '' }}">
@@ -129,7 +164,7 @@
                         </div>
 
                         <div class="row custom-form-group">
-                            <div class="row col-lg lg-pb-3">
+                            <div class="row col-lg">
                                 <div class="col-lg-auto pr-0">
                                     <label>Programa:</label>
                                 </div>
@@ -139,8 +174,21 @@
                             </div>
                         </div>
 
+                        <div class="d-block d-sm-none">
+                            <div class="row custom-form-group ">
+                                <div class="row col-lg">
+                                    <div class="col-lg-auto pr-0">
+                                        <label>Local:</label>
+                                    </div>
+                                    <div class="col-lg-auto">
+                                    {{ $defesa->local->nome }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="row custom-form-group">
-                            <div class="row col-lg lg-pb-3">
+                            <div class="row col-lg">
                                 <div class="col-lg-auto">
                                     <label for="link">link:</label>
                                 </div>

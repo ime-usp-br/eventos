@@ -4,9 +4,9 @@
 
 @section('content')
 @parent
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-12">
+<div id="layout_conteudo">
+    <div class="justify-content-center">
+        <div class="col-12">
             <h1 class='text-center mb-5'>Usuários</h1>
 
             <div class="d-flex justify-content-end">

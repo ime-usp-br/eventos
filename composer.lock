@@ -1045,16 +1045,16 @@
         },
         {
             "name": "google/apiclient-services",
-            "version": "v0.274.0",
+            "version": "v0.276.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-api-php-client-services.git",
-                "reference": "670c3854fffc2f642efa86b083e2664fd55435e1"
+                "reference": "9a0bab5e4472d46bf979e06208da4bd03a5e6103"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/670c3854fffc2f642efa86b083e2664fd55435e1",
-                "reference": "670c3854fffc2f642efa86b083e2664fd55435e1",
+                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/9a0bab5e4472d46bf979e06208da4bd03a5e6103",
+                "reference": "9a0bab5e4472d46bf979e06208da4bd03a5e6103",
                 "shasum": ""
             },
             "require": {
@@ -1083,9 +1083,9 @@
             ],
             "support": {
                 "issues": "https://github.com/googleapis/google-api-php-client-services/issues",
-                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.274.0"
+                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.276.0"
             },
-            "time": "2022-11-13T01:06:13+00:00"
+            "time": "2022-11-25T01:16:27+00:00"
         },
         {
             "name": "google/auth",
@@ -6398,12 +6398,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ayrtonnotrya/laravel-usp-theme.git",
-                "reference": "bbbd4cb74eab3a2b1fa57cbc8da8fb683f132d7b"
+                "reference": "ea1b3df76a84602f631dc1c77221f48759618b88"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ayrtonnotrya/laravel-usp-theme/zipball/bbbd4cb74eab3a2b1fa57cbc8da8fb683f132d7b",
-                "reference": "bbbd4cb74eab3a2b1fa57cbc8da8fb683f132d7b",
+                "url": "https://api.github.com/repos/ayrtonnotrya/laravel-usp-theme/zipball/ea1b3df76a84602f631dc1c77221f48759618b88",
+                "reference": "ea1b3df76a84602f631dc1c77221f48759618b88",
                 "shasum": ""
             },
             "default-branch": true,
@@ -6439,7 +6439,7 @@
             "support": {
                 "source": "https://github.com/ayrtonnotrya/laravel-usp-theme/tree/master"
             },
-            "time": "2022-08-31T17:57:29+00:00"
+            "time": "2022-11-28T15:16:00+00:00"
         },
         {
             "name": "uspdev/replicado",
@@ -7222,16 +7222,16 @@
         },
         {
             "name": "laravel/sail",
-            "version": "v1.16.2",
+            "version": "v1.16.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/sail.git",
-                "reference": "7d1ed5f856ec8b9708712e3fc0708fcabe114659"
+                "reference": "0dbee8802e17911afbe29a8506316343829b056e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sail/zipball/7d1ed5f856ec8b9708712e3fc0708fcabe114659",
-                "reference": "7d1ed5f856ec8b9708712e3fc0708fcabe114659",
+                "url": "https://api.github.com/repos/laravel/sail/zipball/0dbee8802e17911afbe29a8506316343829b056e",
+                "reference": "0dbee8802e17911afbe29a8506316343829b056e",
                 "shasum": ""
             },
             "require": {
@@ -7278,7 +7278,7 @@
                 "issues": "https://github.com/laravel/sail/issues",
                 "source": "https://github.com/laravel/sail"
             },
-            "time": "2022-09-28T13:13:22+00:00"
+            "time": "2022-11-21T16:19:18+00:00"
         },
         {
             "name": "mockery/mockery",
