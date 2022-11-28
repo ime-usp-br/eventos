@@ -16,7 +16,7 @@
         @endphp
 
         @if($eventos->isNotEmpty() or $defesas->isNotEmpty())
-          <h1 class='text-center mb-5 page-title'>Próximas defesas e eventos</h1>
+          <h1 class='text-center mb-5'>Próximas defesas e eventos</h1>
 
           <table class="table table-bordered table-hover" style="font-size:12px;">
             <tr style="background-color: rgba(0,0,0,.075);vertical-align: middle;text-align: center;">
@@ -30,9 +30,9 @@
 
             @foreach($eventos as $evento)
               <tr data-toggle="collapse"  class="accordion-toggle" data-target="{{ '#collapse-evento'.$evento->id }}">
-                <td>{!! $evento->titulo !!}</td>
+                <td style="vertical-align: middle;">{!! $evento->titulo !!}</td>
                 <td class="d-none d-sm-table-cell">{{ $evento->nomeOrganizador }}</td>
-                <td>{{ $evento->tipo->nome }}</td>
+                <td style="vertical-align: middle;text-align: center;">{{ $evento->tipo->nome }}</td>
                 <td style="vertical-align: middle;text-align: center;">{{ $evento->dataInicial . ( $evento->dataFinal ? " à " . $evento->dataFinal : "") }}</td>
                 <td style="vertical-align: middle;text-align: center;">{{ $evento->horarioInicial . ( $evento->horarioFinal ? " às " . $evento->horarioFinal : "" ) }}</td>
                 <td class="d-none d-sm-table-cell">{{ $evento->local->nome }}</td>
@@ -109,9 +109,9 @@
 
             @foreach($defesas as $defesa)
               <tr data-toggle="collapse"  class="accordion-toggle" data-target="{{ '#collapse-defesa'.$defesa->id }}">
-                <td>{!! $defesa->trabalho->titulo !!} </td>
+                <td style="vertical-align: middle;">{!! $defesa->trabalho->titulo !!} </td>
                 <td class="d-none d-sm-table-cell">{{ $defesa->aluno->nome }}</td>
-                <td>{{ str_contains($defesa->nivel, "Doutorado") ? "Defesa de Doutorado" : "Defesa de Mestrado" }}</td>
+                <td style="vertical-align: middle;text-align: center;">{{ str_contains($defesa->nivel, "Doutorado") ? "Defesa de Doutorado" : "Defesa de Mestrado" }}</td>
                 <td style="vertical-align: middle;text-align: center;">{{ $defesa->data }}</td>
                 <td style="vertical-align: middle;text-align: center;">{{ $defesa->horario }}</td>
                 <td class="d-none d-sm-table-cell">{{ $defesa->local->nome }}</td>
