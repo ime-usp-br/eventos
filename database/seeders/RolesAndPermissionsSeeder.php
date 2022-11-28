@@ -23,7 +23,9 @@ class RolesAndPermissionsSeeder extends Seeder
         Permission::firstOrCreate(['name' => 'editar evento']);
         Permission::firstOrCreate(['name' => 'deletar evento']);
 
-        Role::firstOrCreate(['name' => 'Usuário']);
+        Role::firstOrCreate(['name' => 'Operador']);
+
+        Role::firstOrCreate(['name' => 'Secretario da Pós-Graduação']);
 
         Role::firstOrCreate(['name' => 'Moderador']);
 

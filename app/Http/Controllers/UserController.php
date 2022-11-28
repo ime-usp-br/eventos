@@ -28,8 +28,8 @@ class UserController extends Controller
             return redirect("login");
         }
         
-        $users = User::all();
-        $roles = Role::all();
+        $users = User::all()->sortBy("name");
+        $roles = Role::all()->sortBy("name");
 
         $gc = GoogleCalendar::latest("updated_at")->first();
 
@@ -84,7 +84,7 @@ class UserController extends Controller
             abort(403);
         }
 
-        $roles = Role::all();
+        $roles = Role::all()->sortBy("name");
 
         return view('users.edit', compact('user', 'roles'));
     }

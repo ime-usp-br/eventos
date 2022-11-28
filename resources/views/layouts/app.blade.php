@@ -48,15 +48,17 @@
         <li>
             <a href="{{ route('events.index') }}">Eventos</a>
         </li>
+        @if(Auth::user()->hasRole(["Moderador", "Administrador", "Secretario da Pós-Graduação"]))
+            <li>
+                <a href="{{ route('defenses.index') }}">Defesas</a>
+            </li>
+        @endif
         <li>
-            <a href="{{ route('defenses.index') }}">Defesas</a>
+            <form style="padding:0px;" action="{{ route('logout') }}" method="POST" id="logout_form2">
+                @csrf
+                <a onclick="document.getElementById('logout_form2').submit(); return false;">Sair</a>
+            </form>
         </li>
-          <li>
-              <form style="padding:0px;" action="{{ route('logout') }}" method="POST" id="logout_form2">
-                  @csrf
-                  <a onclick="document.getElementById('logout_form2').submit(); return false;">Sair</a>
-              </form>
-          </li>
       </ul>
   </div>
 @endif

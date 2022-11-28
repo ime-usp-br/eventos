@@ -23,7 +23,7 @@ class DefenseController extends Controller
     {
         if(!Auth::check()){
             return redirect("/login");
-        }elseif(!Auth::user()->hasRole(["Administrador", "Moderador"])){
+        }elseif(!Auth::user()->hasRole(["Administrador", "Moderador", "Secretario da Pós-Graduação"])){
             abort(403);
         }
 
@@ -120,7 +120,7 @@ class DefenseController extends Controller
     public function edit(Defense $defense)
     {
         if(Auth::check()){
-            if(!Auth::user()->hasRole(["Moderador", "Administrador"])){
+            if(!Auth::user()->hasRole(["Moderador", "Administrador", "Secretario da Pós-Graduação"])){
                 abort(403);
             }
         }else{
@@ -140,7 +140,7 @@ class DefenseController extends Controller
     public function update(UpdateDefenseRequest $request, Defense $defense)
     {
         if(Auth::check()){
-            if(!Auth::user()->hasRole(["Moderador", "Administrador"])){
+            if(!Auth::user()->hasRole(["Moderador", "Administrador", "Secretario da Pós-Graduação"])){
                 abort(403);
             }
         }else{
@@ -182,7 +182,7 @@ class DefenseController extends Controller
     public function destroy(Defense $defense)
     {
         if(Auth::check()){
-            if(!Auth::user()->hasRole(["Moderador", "Administrador"])){
+            if(!Auth::user()->hasRole(["Moderador", "Administrador", "Secretario da Pós-Graduação"])){
                 abort(403);
             }
         }else{
