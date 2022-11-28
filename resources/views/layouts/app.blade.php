@@ -6,8 +6,8 @@
 
 @section('styles')
   @parent
-    <link rel="stylesheet" href="{{ asset('css/app.css').'?version=1' }}" />
-    <link rel="stylesheet" href="{{ asset('css/listmenu_v.css').'?version=1' }}" />
+    <link rel="stylesheet" href="{{ asset('css/app.css').'?version=2' }}" />
+    <link rel="stylesheet" href="{{ asset('css/listmenu_v.css').'?version=2' }}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-datetimepicker/2.7.1/css/bootstrap-material-datetimepicker.min.css" integrity="sha512-uLI05NEY4Yj4tbrsvcBHTcRJBT4gZaxENUHwjWMcLIK0xaVzpr4ScBA5Wc7dgw/wVTzKLGWsq0MeXQp0SkXpIQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 @endsection
 
@@ -38,7 +38,7 @@
           @can("editar usuario")
               <li>
                   <a href="{{ route('users.index') }}">Usuários</a>
-                  <ul>
+                  <ul class="sub-menu-ul">
                       <li>
                           <a href="{{ route('users.loginas') }}">Logar Como</a>
                       </li>
