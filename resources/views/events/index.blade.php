@@ -103,6 +103,15 @@
 
                             <div class="row custom-form-group">
                                 <div class="col-lg lg-pb-3">
+                                    <label>Criado por:</label> {{$evento->criador->name}}
+                                </div>
+                                <div class="col-lg">
+                                    <label>Criado em:</label> {{$evento->created_at}}
+                                </div>
+                            </div>
+
+                            <div class="row custom-form-group">
+                                <div class="col-lg lg-pb-3">
                                     <label for="dataInicial">Data Inicial:</label> {{$evento->dataInicial}}
                                 </div>
                                 <div class="col-lg lg-pb-3">
