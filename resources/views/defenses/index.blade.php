@@ -10,6 +10,16 @@
             <h1 class='text-center mb-5'>Defesas</h1>
 
             <div class="d-flex justify-content-end">
+
+                <div class="px-1 py-2">
+                    <a class="btn btn-outline-primary"
+                        data-toggle="tooltip" data-placement="top"
+                        title="Importar do Replicado"
+                        href="{{ route('defenses.import') }}"
+                    >
+                        Importar do Replicado
+                    </a>
+                </div>
                 <div class="px-1 py-2">
                     <form action="{{ route('defenses.index') }}" method="GET">
                         <input type="hidden" name="filtro" value="passados">

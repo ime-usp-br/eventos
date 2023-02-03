@@ -36,6 +36,7 @@ Route::get("/attachment/download/{attachment}",[AttachmentController::class, "do
 Route::get("/api/eventos", [ApiController::class, "getAllEvents"]);
 Route::get("/api/defesas", [ApiController::class, "getAllDefenses"]);
 
+Route::get("/defenses/import",[DefenseController::class, "importFromReplicado"])->name("defenses.import");
 Route::resource("defenses", DefenseController::class);
 
 Route::get("/google/login", [GoogleController::class, "login"])->name("google.login");
