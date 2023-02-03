@@ -17,6 +17,7 @@ class Defense extends Model
     protected $fillable = [
         'nivel',
         'programa',
+        'sigla',
         'data',
         'horario',
         'link',

@@ -238,10 +238,18 @@ class DefenseController extends Controller
         $niveis = ["ME"=>"Mestrado","DO"=>"Doutorado", "DD"=>"Doutorado Direto"];
         $tipos = ["ORI"=>"Orientador", "COO"=>"Coorientador"];
         $vinculos = ["PRE"=>"Presidente","TIT"=>"Titular","SUP"=>"Suplente","SUB"=>"Substituto"];
+        $siglas = [
+            "Matemática Aplicada" => "MAP",
+            "Estatística" => "MAE",
+            "Ciência da Computação" => "MAC",
+            "Mestrado Profissional em Ensino de Matemática" => "MPEM",
+            "Bioinformática" => "BIOINFO",
+            "Matemática" => "MAT",
+        ];
 
         foreach($res as $r){
             $aluno = Student::firstOrCreate(["nome"=>$r["nompes"],"codpes"=>$r["codpes"],"sexo"=>$r["sexo"]]);
-            $defesa = Defense::firstOrCreate(["nivel"=>$niveis[$r["nivpgm"]],"programa"=>$r["nomcur"],"alunoID"=>$aluno->id]);
+            $defesa = Defense::updateOrCreate(["nivel"=>$niveis[$r["nivpgm"]],"programa"=>$r["nomcur"],"alunoID"=>$aluno->id],["sigla"=>$siglas[$r["nomcur"]]]);
 
 
             $query = " SELECT DET.tittrb as titulo, DET.rsutrb as resumo, DET.palcha as palavrasChave, DET.tittrbigl as title, DET.rsutrbigl as abstract, DET.palchaigl as keyWords";
