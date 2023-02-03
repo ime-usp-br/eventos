@@ -41,7 +41,7 @@ class ApiController extends Controller
             }elseif($a->horario < $b->horario){
                 return -1;
             }
-        });
+        })->values();
 
         return response($defesas->toJson(JSON_PRETTY_PRINT),200);
     }
