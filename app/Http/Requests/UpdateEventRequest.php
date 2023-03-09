@@ -42,6 +42,9 @@ class UpdateEventRequest extends FormRequest
             'anexosIDs' => "sometimes|array",
             'anexosNovos' => "sometimes|array",
             "anexosNovos.*.arquivo" => "required|mimes:jpeg,bmp,png,gif,svg,pdf|max:10240",
+            'inscricaoPeloSistema' => 'sometimes|bool',
+            "dataInicioInscricoes" => "required_if:inscricaoPeloSistema,1|nullable|date_format:d/m/Y|before:dataFimInscricoes",
+            "dataFimInscricoes" => "required_if:inscricaoPeloSistema,1|nullable|date_format:d/m/Y",
         ];
     }
 

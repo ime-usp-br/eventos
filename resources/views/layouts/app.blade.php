@@ -30,7 +30,7 @@
 @section('content')
 @if(Auth::check())
   <div id="layout_menu">
-      <ul id="menulateral" class="menulist">
+      <ul id="menulateral" class="menulist mb-5">
           <li class="menuHeader">Acesso Restrito</li>
           <li>
               <a href="{{ route('home') }}">Página Inicial</a>

@@ -148,6 +148,24 @@
 
                             <div class="row custom-form-group">
                                 <div class="col-lg lg-pb-3">
+                                    <label>Inscrição Pelo Sistema:</label> {{ $evento->inscricaoPeloSistema ? 'Sim' : 'Não' }}
+                                </div>
+                                <div class="col-lg lg-pb-3">
+                                    <label>Data Inicio das Inscrições:</label> {{$evento->dataInicioInscricoes}}
+                                </div>
+                                <div class="col-lg">
+                                    <label>Data Final das Inscrições:</label> {{$evento->dataFimInscricoes}}
+                                </div>
+                            </div>
+
+                            <div class="row custom-form-group">
+                                <div class="col-lg lg-pb-3">
+                                    <label>Link de Inscrição:</label> <a href="{{ $evento->inscricaoPeloSistema ? route('registration.create', $evento->slug) : '' }}">{{ $evento->inscricaoPeloSistema ? route('registration.create', $evento->slug) : '' }}</a>
+                                </div>
+                            </div>
+
+                            <div class="row custom-form-group">
+                                <div class="col-lg lg-pb-3">
                                     <label for="idiomaID">Idioma:</label> {{$evento->idioma->nome}}
                                 </div>
                                 <div class="col-lg lg-pb-3">

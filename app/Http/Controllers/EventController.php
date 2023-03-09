@@ -134,6 +134,8 @@ class EventController extends Controller
 
         $validated = $request->validated();
 
+        $validated['inscricaoPeloSistema'] = isset($validated['inscricaoPeloSistema']) ? 1 : 0;
+
         $anexos = $validated["anexosNovos"] ?? [];
         unset($validated["anexosNovos"]);
 
@@ -255,6 +257,9 @@ class EventController extends Controller
         $validated['exigeInscricao'] = isset($validated['exigeInscricao']) ? 1 : 0;
         $validated['gratuito'] = isset($validated['gratuito']) ? 1 : 0;
         $validated['emiteCertificado'] = isset($validated['emiteCertificado']) ? 1 : 0;
+        $validated['dataInicioInscricoes'] = isset($validated['inscricaoPeloSistema']) ? $validated['dataInicioInscricoes'] : null;
+        $validated['dataFimInscricoes'] = isset($validated['inscricaoPeloSistema']) ? $validated['dataFimInscricoes'] : null;
+        $validated['inscricaoPeloSistema'] = isset($validated['inscricaoPeloSistema']) ? 1 : 0;
 
         $validated["localID"] = Location::firstOrCreate(["nome"=>$validated["local"]])->id;
         unset($validated["local"]);

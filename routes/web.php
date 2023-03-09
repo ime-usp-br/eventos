@@ -7,6 +7,7 @@ use App\Http\Controllers\AttachmentController;
 use App\Http\Controllers\ApiController;
 use App\Http\Controllers\DefenseController;
 use App\Http\Controllers\GoogleController;
+use App\Http\Controllers\RegistrationController;
 
 
 /*
@@ -41,3 +42,6 @@ Route::resource("defenses", DefenseController::class);
 
 Route::get("/google/login", [GoogleController::class, "login"])->name("google.login");
 Route::get("/google/callback", [GoogleController::class, "callback"]);
+
+Route::get("/inscricao/{slug}", [RegistrationController::class, "create"])->name("registration.create");
+Route::post("/inscricao/{slug}", [RegistrationController::class, "store"])->name("registration.store");

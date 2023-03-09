@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Attachment;
 use App\Models\Modality;
@@ -14,6 +15,7 @@ use Carbon\Carbon;
 class Event extends Model
 {
     use HasFactory;
+    use Sluggable;
 
     protected $fillable = [
         'titulo',
@@ -35,7 +37,12 @@ class Event extends Model
         'modalidadeID',
         'tipoID',
         'googleAgendaId',
-        'googleEventoId'
+        'googleEventoId',
+        'inscricaoPeloSistema',
+        'dataInicioInscricoes',
+        'dataFimInscricoes',
+        'slug',
+        'linkInscricao',
     ];
 
     protected $casts = [
@@ -44,6 +51,8 @@ class Event extends Model
         'dataFinal' => 'date:d/m/Y',
         'horarioInicial' => 'datetime:H:i',
         'horarioFinal' => 'datetime:H:i',
+        'dataInicioInscricoes' => 'date:d/m/Y',
+        'dataFimInscricoes' => 'date:d/m/Y',
     ];
 
     protected $hidden = [
@@ -58,7 +67,28 @@ class Event extends Model
         "updated_at",
         "dataAprovacao",
         'aprovado',
+        'slug',
     ];
+
+    public function setDataFimInscricoesAttribute($value)
+    {
+        $this->attributes['dataFimInscricoes'] = $value ? Carbon::createFromFormat('d/m/Y', $value)->endOfDay() : null;
+    }
+
+    public function getDataFimInscricoesAttribute($value)
+    {
+        return $value ? Carbon::parse($value)->format('d/m/Y') : '';
+    }
+
+    public function setDataInicioInscricoesAttribute($value)
+    {
+        $this->attributes['dataInicioInscricoes'] = $value ? Carbon::createFromFormat('d/m/Y', $value)->startOfDay() : null;
+    }
+
+    public function getDataInicioInscricoesAttribute($value)
+    {
+        return $value ? Carbon::parse($value)->format('d/m/Y') : '';
+    }
 
     public function setDataAprovacaoAttribute($value)
     {
@@ -174,5 +204,14 @@ class Event extends Model
         }
         
         return new \Google\Service\Calendar\Event($evento_array);
+    }
+    
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'titulo'
+            ]
+        ];
     }
 }

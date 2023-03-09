@@ -41,6 +41,9 @@ class StoreEventRequest extends FormRequest
             'descricao' => 'required|max:8192',
             'anexosNovos' => "sometimes|array",
             "anexosNovos.*.arquivo" => "required|mimes:jpeg,bmp,png,gif,svg,pdf|max:10240",
+            'inscricaoPeloSistema' => 'sometimes|bool',
+            "dataInicioInscricoes" => "required_if:inscricaoPeloSistema,==,true|nullable|date_format:d/m/Y|before:dataFimInscricoes",
+            "dataFimInscricoes" => "required_if:inscricaoPeloSistema,==,True|nullable|date_format:d/m/Y",
         ];
     }
 

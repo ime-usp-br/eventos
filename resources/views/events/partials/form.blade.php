@@ -43,7 +43,7 @@
             />
         </div>
     </div>
-    <div class="col-lg">
+    <div class="col-lg lg-pb-3">
         <label for="horarioFinal">Horário Final:</label>
         <div class="col-12 px-0">
             <input class="custom-form-control custom-timepicker"
@@ -52,9 +52,7 @@
             />
         </div>
     </div>
-
-
-    <div class="col-lg lg-pb-3">
+    <div class="col-lg">
         <label for="local">Local*:</label>
         <a  class="text-dark text-decoration-none"
             data-toggle="modal"
@@ -92,6 +90,32 @@
         <label for="emiteCertificado">Emite Certificado:</label>
         <input class="checkbox" type="checkbox" name="emiteCertificado"
         value="1" {{ old('emiteCertificado') ? 'checked' : ($evento->emiteCertificado ? 'checked' : '')  }}/>
+    </div>
+</div>
+
+<div class="row custom-form-group">
+    <div class="col-lg lg-pb-3 align-self-center">
+        <label for="inscricaoPeloSistema">Inscrição Pelo Sistema:</label>
+        <input class="checkbox" type="checkbox" id="inscricaoPeloSistema" name="inscricaoPeloSistema" onClick="ckChange(this)"
+        value="1" {{ old('inscricaoPeloSistema') ? 'checked' : ($evento->inscricaoPeloSistema ? 'checked' : '')  }}/>
+    </div>
+    <div class="col-lg lg-pb-3">
+        <label for="dataInicioInscricoes">Data Inicio das Inscrições:</label>
+        <div class="col-12 px-0" style="white-space: nowrap;">
+            <input class="custom-form-control custom-datepicker"
+                type="text" name="dataInicioInscricoes" id="dataInicioInscricoes" autocomplete="off"
+                value="{{ old('dataInicioInscricoes') ?? $evento->dataInicioInscricoes ?? ''}}" style="max-width:200px;"
+            />
+        </div>
+    </div>
+    <div class="col-lg">
+        <label for="dataFimInscricoes">Data Final das Inscrições:</label>
+        <div class="col-12 px-0" style="white-space: nowrap;">
+            <input class="custom-form-control custom-datepicker"
+                type="text" name="dataFimInscricoes" id="dataFimInscricoes" autocomplete="off"
+                value="{{ old('dataFimInscricoes') ?? $evento->dataFimInscricoes ?? ''}}" style="max-width:200px;"
+            />
+        </div>
     </div>
 </div>
 

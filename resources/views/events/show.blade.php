@@ -99,6 +99,18 @@
                         </div>
                     </div>
 
+                    <div class="row custom-form-group">
+                        <div class="col-lg lg-pb-3">
+                            <label>Inscrição Pelo Sistema:</label> {{ $evento->inscricaoPeloSistema ? 'Sim' : 'Não' }}
+                        </div>
+                        <div class="col-lg lg-pb-3">
+                            <label>Data Inicio das Inscrições:</label> {{$evento->dataInicioInscricoes}}
+                        </div>
+                        <div class="col-lg">
+                            <label>Data Final das Inscrições:</label> {{$evento->dataFimInscricoes}}
+                        </div>
+                    </div>
+
                     <div class="custom-form-group">
                             <label for="nomeOrganizador">Nome do Organizador:</label> {{$evento->nomeOrganizador}}
                     </div>

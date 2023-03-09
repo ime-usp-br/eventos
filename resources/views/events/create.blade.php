@@ -45,5 +45,40 @@
     plugins: 'link,code',
     link_default_target: '_blank'
     });
+
+    $(window).on('load', function() {
+        if ($("#inscricaoPeloSistema").prop('checked')) {
+            $("#dataInicioInscricoes").prop("disabled", false);
+            $("#dataFimInscricoes").prop("disabled", false);
+            $("#dataInicioInscricoes").datepicker( "option", "disabled", false );
+            $("#dataFimInscricoes").datepicker( "option", "disabled", false );
+        }
+        else {
+            $("#dataInicioInscricoes").prop("disabled", true);
+            $("#dataFimInscricoes").prop("disabled", true);
+            $("#dataInicioInscricoes").datepicker( "option", "disabled", true );
+            $("#dataFimInscricoes").datepicker( "option", "disabled", true );
+        }    
+    });
+
+    function ckChange(ckType){
+        var checked = document.getElementById(ckType.id);
+        if (checked.checked) {
+            if(ckType.id == "inscricaoPeloSistema"){
+                $("#dataInicioInscricoes").prop("disabled", false);
+                $("#dataFimInscricoes").prop("disabled", false);
+                $("#dataInicioInscricoes").datepicker( "option", "disabled", false );
+                $("#dataFimInscricoes").datepicker( "option", "disabled", false );
+            }
+        }
+        else {
+            if(ckType.id == "inscricaoPeloSistema"){
+                $("#dataInicioInscricoes").prop("disabled", true);
+                $("#dataFimInscricoes").prop("disabled", true);
+                $("#dataInicioInscricoes").datepicker( "option", "disabled", true );
+                $("#dataFimInscricoes").datepicker( "option", "disabled", true );
+            }
+        }    
+    };
 </script>
 @endsection

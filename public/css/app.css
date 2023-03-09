@@ -167,7 +167,7 @@ input[type=file].custom-form-input::file-selector-button {
   border-radius: 0.25rem;
 }
 
-@media screen and (max-width:720px){
+@media screen and (max-width:992px){
 
   .btn {
     font-size: 10px;
@@ -190,4 +190,25 @@ input[type=file].custom-form-input::file-selector-button {
   h1 {
     font-size: 1.5rem;
   }
+}
+
+label.error {
+  color: red;
+  font-size: 1rem;
+  display: block;
+  margin-top: 5px;
+}
+
+input.error {
+  border: 1px dashed red !important;
+  box-shadow: 0 0 10px red !important;
+  font-weight: 300;
+  color: red !important;
+}
+
+select.error {
+  border: 1px dashed red !important;
+  box-shadow: 0 0 10px red !important;
+  font-weight: 300;
+  color: red !important;
 }
