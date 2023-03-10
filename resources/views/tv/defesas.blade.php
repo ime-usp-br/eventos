@@ -35,8 +35,10 @@
         <div class="container-fluid p-0" id="page">
             <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
+                    @php $first = true; @endphp
                     @foreach($defesas as $defesa)
-                        <div class="carousel-item active" data-bs-interval="15000">
+                        <div class="{{ $first ? 'carousel-item active' : 'carousel-item' }}" data-bs-interval="15000">
+                            @php $first = false; @endphp
                             <div class="row horizontal">
                                 <h1 class="text-center text-white lateral-titulo">DEFESAS AGENDADAS</h1>
                             </div>
