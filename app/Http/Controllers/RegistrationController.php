@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreRegistrationRequest;
 use App\Http\Requests\UpdateRegistrationRequest;
+use App\Mail\NotifyAboutRegistration;
 use App\Models\Registration;
 use App\Models\Event;
+use Illuminate\Support\Facades\Mail;
 use Session;
 
 class RegistrationController extends Controller
@@ -60,6 +62,8 @@ class RegistrationController extends Controller
         $validated["eventoID"] = $evento->id;
 
         Registration::create($validated);
+
+        Mail::to($validated["email"])->queue(new NotifyAboutRegistration($evento));
 
         Session::flash("alert-success", "Inscrição realizada com sucesso");
         
