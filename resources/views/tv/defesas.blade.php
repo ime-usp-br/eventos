@@ -107,6 +107,16 @@
                     @endforeach
                 </div>
             </div>
+            <div id="footer" style="display:none;">
+                <div class="row">
+                    <div class="col-1"></div>
+                    <div class="col-3"><img src="img/assinatura.png" class="assinatura"></div>
+                    <div class="col-4 info text-center">Sistema em testes<br>Fale conosco:
+                        gt-comunica@ime.usp.br</div>
+                    <div class="col-3 p-2" id="clock"></div>
+                    <div class="col-1"></div>
+                </div>
+            </div>
         </div>
     </body>
 </html>
