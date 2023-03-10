@@ -31,4 +31,18 @@ class Committee extends Model
     {
         return $this->hasMany(CommitteeMember::class, "bancaID");
     }
+
+    public function getPresidente()
+    {
+        return $this->membros()->where("vinculo", "Presidente")->first();
+    }
+
+    public function getTitulares()
+    {   
+        if($this->membros()->where("staptp",true)->exists()){
+            return $this->membros()->where("staptp", true)->where("vinculo", "!=", "Presidente")->get();
+        }else{
+            return $this->membros()->where("vinculo", "Titular")->get();
+        }
+    }
 }

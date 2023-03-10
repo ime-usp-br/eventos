@@ -37,4 +37,9 @@ class Student extends Model
     {
         return $this->hasMany(Thesis::class, "alunoID");
     }
+
+    public function getOrientador()
+    {
+        return $this->orientadores()->where("tipo", "Orientador")->first();
+    }
 }

@@ -8,6 +8,7 @@ use App\Http\Controllers\ApiController;
 use App\Http\Controllers\DefenseController;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\RegistrationController;
+use App\Http\Controllers\TVController;
 
 
 /*
@@ -46,3 +47,5 @@ Route::get("/google/callback", [GoogleController::class, "callback"]);
 Route::get("/inscricao/{slug}", [RegistrationController::class, "create"])->name("registration.create");
 Route::post("/inscricao/{slug}", [RegistrationController::class, "store"])->name("registration.store");
 Route::get("/events/{event}/subscriptions", [RegistrationController::class, "index"])->name("registration.index");
+
+Route::get("/tv/defesas", [TVController::class, "defesas"]);
