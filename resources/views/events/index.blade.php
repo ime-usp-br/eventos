@@ -54,7 +54,7 @@
                                     </div>
                                     @if(Auth::user()->hasRole(["Administrador", "Moderador"]))
                                         @include('events.modals.emailSendingConfirmation', ['eventoID'=>$evento->id])
-                                        <div class="col-sm-auto pl-2">
+                                        <div class="col-sm-auto px-2">
                                             @if(!$evento->aprovado)
                                                 <a class="btn btn-outline-success btn-sm"
                                                     data-toggle="modal"
@@ -72,6 +72,19 @@
                                                 </form>
                                             @endif
                                         </div>
+                                    @endif
+                                    @if(Auth::user()->hasRole(["Administrador", "Moderador"]) or $evento->cadastradorID==Auth::user()->id)
+                                        @if($evento->inscritos()->exists() or $evento->inscricaoPeloSistema)
+                                            <div class="col-sm-auto pl-2">
+                                                <a class="btn btn-outline-dark btn-sm"
+                                                    data-toggle="tooltip" data-placement="top"
+                                                    title="Ver inscritos neste evento"
+                                                    href="{{ route('registration.index', $evento) }}"
+                                                >
+                                                    Inscritos
+                                                </a>
+                                            </div>
+                                        @endif
                                     @endif
                                 </div>
                                 @if(Auth::user()->hasRole(["Administrador", "Moderador"]) or $evento->cadastradorID == Auth::user()->id)
@@ -159,7 +172,7 @@
                             </div>
 
                             <div class="row custom-form-group">
-                                <div class="col-lg lg-pb-3">
+                                <div class="col-lg">
                                     <label>Link de Inscrição:</label> <a href="{{ $evento->inscricaoPeloSistema ? route('registration.create', $evento->slug) : '' }}">{{ $evento->inscricaoPeloSistema ? route('registration.create', $evento->slug) : '' }}</a>
                                 </div>
                             </div>

@@ -9,6 +9,7 @@ use App\Models\Registration;
 use App\Models\Event;
 use Illuminate\Support\Facades\Mail;
 use Session;
+use Auth;
 
 class RegistrationController extends Controller
 {
@@ -17,9 +18,19 @@ class RegistrationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Event $event)
     {
-        //
+        if(Auth::check()){
+            if(!Auth::user()->hasRole(["Administrador", "Moderador"]) and $event->criador->id != Auth::user()->id){
+                abort(403);
+            }
+        }else{
+            return redirect("/login");
+        }
+
+        $inscritos = $event->inscritos;
+
+        return view("registration.index", ["evento"=>$event,"inscritos"=>$inscritos]);
     }
 
     /**

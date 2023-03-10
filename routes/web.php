@@ -45,3 +45,4 @@ Route::get("/google/callback", [GoogleController::class, "callback"]);
 
 Route::get("/inscricao/{slug}", [RegistrationController::class, "create"])->name("registration.create");
 Route::post("/inscricao/{slug}", [RegistrationController::class, "store"])->name("registration.store");
+Route::get("/events/{event}/subscriptions", [RegistrationController::class, "index"])->name("registration.index");

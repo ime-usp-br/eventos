@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Registration;
 use App\Models\Attachment;
 use App\Models\Modality;
 use App\Models\Kind;
@@ -173,6 +174,11 @@ class Event extends Model
     public function moderador()
     {
         return $this->belongsTo(User::class, "moderadorID");
+    }
+
+    public function inscritos()
+    {
+        return $this->hasMany(Registration::class, "eventoID");
     }
 
     public function getGoogleEvent()
