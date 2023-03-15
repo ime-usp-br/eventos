@@ -59,7 +59,7 @@ class TVController extends Controller
 
         $imagens = [];
 
-        foreach(Storage::disk("public")->files("tv/imagens") as $imagem){
+        foreach(Storage::disk("local")->files("public/tv/imagens") as $imagem){
             $imagem = explode("/", $imagem);
             array_push($imagens, end($imagem));
         }
