@@ -102,7 +102,11 @@
                                         <p class="txt-banca">{{ $titular->sexo == "M" ? "Prof. Dr. " : "Profa. Dra. " }}{{ $titular->nome }}{{ $titular->instituicao ? ", ".$titular->instituicao->sigla : "" }}</p>
                                     @endforeach
 
-                                    <p class="txt-programa-titulo">{{$defesa->programa}}</p>
+                                    @if($defesa->programa == "Mestrado Profissional em Ensino de Matemática")
+                                        <p class="txt-programa-titulo">{{$defesa->programa}}</p>
+                                    @else
+                                        <p class="txt-programa-titulo">Programa de Pós-Graduação em {{$defesa->programa}}</p>
+                                    @endif
                                 </div>
                             </div>
                         </div>
