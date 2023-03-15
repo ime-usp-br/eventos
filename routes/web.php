@@ -49,3 +49,5 @@ Route::post("/inscricao/{slug}", [RegistrationController::class, "store"])->name
 Route::get("/events/{event}/subscriptions", [RegistrationController::class, "index"])->name("registration.index");
 
 Route::get("/tv/defesas", [TVController::class, "defesas"]);
+
+Route::get("/tv/defesas-imagens", [TVController::class, "defesasEImagens"]);
