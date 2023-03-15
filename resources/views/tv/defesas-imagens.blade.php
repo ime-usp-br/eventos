@@ -108,7 +108,7 @@
                         </div>
                     @endforeach
                     @foreach($imagens as $imagem)
-                        <div class="{{ $first ? 'carousel-item active' : 'carousel-item' }}" data-bs-interval="15000">
+                        <div class="{{ $first ? 'carousel-item active' : 'carousel-item' }}" data-bs-interval="30000">
                             @php $first = false; @endphp
                             <div class="row">
                                 @if(explode(".",$imagem)[1] == "mp4")
