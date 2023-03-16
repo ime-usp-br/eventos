@@ -19,7 +19,7 @@
 
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="{{ asset('css/tv/bootstrap.min.css') }}" rel="stylesheet" />
-        <link href="{{ asset('css/tv/styles.css').'?v=1' }}" rel="stylesheet" />
+        <link href="{{ asset('css/tv/styles.css').'?v=2' }}" rel="stylesheet" />
 
 
         <!-- JQuery -->

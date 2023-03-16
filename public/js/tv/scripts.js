@@ -35,4 +35,4 @@ function pisca() {
     window.location.reload(true);
 }
 
-var timer2 = setInterval(pisca, 600000);
+var timer2 = setInterval(pisca, 3600000);
