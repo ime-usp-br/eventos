@@ -241,12 +241,6 @@ $(document).ready(function() {
     $.validator.addMethod("rg", function(value, element) {
         return this.optional(element) || /^[0-9]{2}\.[0-9]{3}\.[0-9]{3}-[0-9A-Za-z]{1}$/.test(value);
     }, "Por favor, digite um RG válido");
-
-    $.validator.addMethod("phone", function(value, element) {
-        return this.optional(element) || /^\+[0-9]{2}\([0-9]{2}\)[0-9]{4,5}-[0-9]{4}$/.test(value);
-    }, "Por favor, digite um número de celular válido");
-    $('#phone').inputmask("+99(99)9999[9]-9999", {
-    });
     $('#rg').inputmask("99.999.999-*", {
         definitions: {
         '*': {
@@ -283,8 +277,7 @@ $(document).ready(function() {
         rg: true
       },
       phone: {
-        required: true,
-        phone: true
+        required: true
       },
       affiliation: {
         required: true
@@ -331,7 +324,6 @@ $(document).ready(function() {
       },
       phone: {
         required: "Por favor, digite seu número de celular",
-        phone: "Por favor, digite um número de celular válido"
       },
       affiliation: {
         required: "Por favor, informe a instituição"
