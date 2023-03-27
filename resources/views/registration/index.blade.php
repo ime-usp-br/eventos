@@ -29,6 +29,13 @@
                             <td>{{ $inscrito->country }}</td>
                             <td>
                                 
+                            <a class="btn btn-outline-dark btn-sm"
+                                data-toggle="tooltip" data-placement="top"
+                                title="Ver ficha de inscrição completa"
+                                href="{{ route('registration.show', $inscrito) }}"
+                            >
+                                Ver Ficha
+                            </a>
                             </td>
                         </tr>
                     @endforeach

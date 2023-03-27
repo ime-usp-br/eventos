@@ -89,7 +89,15 @@ class RegistrationController extends Controller
      */
     public function show(Registration $registration)
     {
-        //
+        if(Auth::check()){
+            if(!Auth::user()->hasRole(["Administrador", "Moderador"]) and $registration->evento->criador->id != Auth::user()->id){
+                abort(403);
+            }
+        }else{
+            return redirect("/login");
+        }
+
+        return view("registration.show", ["inscrito"=>$registration]);
     }
 
     /**
