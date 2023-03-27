@@ -11,34 +11,39 @@
             <h2 class='text-center mb-5'>{{$evento->titulo}}</h2>
 
             @if(count($inscritos) > 0)
-                <table class="table table-bordered table-striped table-hover" style="font-size:15px;">
-                    <tr>
-                        <th>Nome</th>
-                        <th>E-mail</th>
-                        <th>Telefone</th>
-                        <th>Instituição</th>
-                        <th>País</th>
-                        <th></th>
-                    </tr>
-                    @foreach($inscritos as $inscrito)
-                        <tr class="text-center">
-                            <td>{{ $inscrito->fullName }}</td>
-                            <td>{{ $inscrito->email }}</td>
-                            <td>{{ $inscrito->phone }}</td>
-                            <td>{{ $inscrito->affiliation }}</td>
-                            <td>{{ $inscrito->country }}</td>
-                            <td>
-                                
-                            <a class="btn btn-outline-dark btn-sm"
-                                data-toggle="tooltip" data-placement="top"
-                                title="Ver ficha de inscrição completa"
-                                href="{{ route('registration.show', $inscrito) }}"
-                            >
-                                Ver Ficha
-                            </a>
-                            </td>
+                <table id="tabela-inscritos" class="table table-bordered table-striped table-hover" style="font-size:15px;">
+
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>E-mail</th>
+                            <th>Telefone</th>
+                            <th>Instituição</th>
+                            <th>País</th>
+                            <th></th>
                         </tr>
-                    @endforeach
+                    </thead>
+
+                    <tbody>
+                        @foreach($inscritos as $inscrito)
+                            <tr class="text-center">
+                                <td>{{ $inscrito->fullName }}</td>
+                                <td>{{ $inscrito->email }}</td>
+                                <td>{{ $inscrito->phone }}</td>
+                                <td>{{ $inscrito->affiliation }}</td>
+                                <td>{{ $inscrito->country }}</td>
+                                <td>                                    
+                                    <a class="btn btn-outline-dark btn-sm"
+                                        data-toggle="tooltip" data-placement="top"
+                                        title="Ver ficha de inscrição completa"
+                                        href="{{ route('registration.show', $inscrito) }}"
+                                    >
+                                        Ver Ficha
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
                 </table>
             @else
                 <p class="text-center">Não há inscritos neste evento</p>                
@@ -46,4 +51,19 @@
         </div>
     </div>
 </div>
+@endsection
+
+
+
+@section('javascripts_bottom')
+  <script>
+    $(document).ready(function() {
+        $('#tabela-inscritos').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf'
+            ]
+        });
+    } );
+  </script>
 @endsection
