@@ -16,6 +16,7 @@
                     <thead>
                         <tr>
                             <th>Nome</th>
+                            <th>Apelido</th>
                             <th>E-mail</th>
                             <th>Telefone</th>
                             <th>Instituição</th>
@@ -28,6 +29,7 @@
                         @foreach($inscritos as $inscrito)
                             <tr class="text-center">
                                 <td>{{ $inscrito->fullName }}</td>
+                                <td>{{ $inscrito->nickname }}</td>
                                 <td>{{ $inscrito->email }}</td>
                                 <td>{{ $inscrito->phone }}</td>
                                 <td>{{ $inscrito->affiliation }}</td>
