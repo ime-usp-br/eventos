@@ -3,9 +3,7 @@ $(function(){
       date: false,
       format: 'HH:mm',
       shortTime: false,
-      clearButton: false,
-      
-      currentDate: '00:00:00 AM',
+      clearButton: true,
       nowButton: false,
       switchOnClick: true,
       cancelText: 'Cancelar',
