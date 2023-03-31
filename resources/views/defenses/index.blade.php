@@ -55,7 +55,7 @@
                                         <b>{{$defesa->aluno->nome}}</b>
                                     </div>
                                 </div>
-                                @if(Auth::user()->hasRole(["Administrador", "Moderador"]))
+                                @if(Auth::user()->hasRole(["Administrador", "Moderador", "Secretario da Pós-Graduação"]))
                                     <div class="text-rigth mr-3" style="white-space: nowrap;">
                                         <a class="text-dark text-decoration-none"
                                             data-toggle="tooltip" data-placement="top"
