@@ -126,3 +126,9 @@
         </div>
     </body>
 </html>
+
+<script>
+    $(document).load(function () {
+        window.scrollBy(0,100);
+    });
+</script>

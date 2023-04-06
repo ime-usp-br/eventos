@@ -142,6 +142,9 @@
 </html>
 
 <script>
+    $(document).load(function () {
+        window.scrollBy(0,100);
+    });
     $('#carouselExampleSlidesOnly').on('slide.bs.carousel', function (ev) {
         var target = ev.relatedTarget
         if($(target).find("video").length > 0){
