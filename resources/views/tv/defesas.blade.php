@@ -126,11 +126,3 @@
         </div>
     </body>
 </html>
-
-<script>
-    function scrollDown() {
-        window.scrollBy(0,100);
-        console.log("teste");
-    }
-    setTimeout(scrollDown, 1000);
-</script>
