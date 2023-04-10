@@ -21,6 +21,7 @@
                             <th>Telefone</th>
                             <th>Instituição</th>
                             <th>País</th>
+                            <th>Data da Inscrição</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -34,6 +35,7 @@
                                 <td>{{ $inscrito->phone }}</td>
                                 <td>{{ $inscrito->affiliation }}</td>
                                 <td>{{ $inscrito->country }}</td>
+                                <td>{{ $inscrito->created_at }}</td>
                                 <td>                                    
                                     <a class="btn btn-outline-dark btn-sm"
                                         data-toggle="tooltip" data-placement="top"
