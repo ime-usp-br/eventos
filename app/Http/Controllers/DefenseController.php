@@ -275,16 +275,15 @@ class DefenseController extends Controller
             
             $banca = Committee::firstOrCreate(["defesaID"=>$defesa->id]);
 
-            $query = " SELECT VP.nompes as nome, VP.codpes, R.vinptpbantrb as vinculo, P.sexpes as sexo, R.staptp";
-            $query .= " FROM AGPROGRAMA as AGP, VINCULOPESSOAUSP as VP, PESSOA as P, R48PGMTRBDOC as R";
+            $query = " SELECT P.nompes as nome, P.codpes, R.vinptpbantrb as vinculo, P.sexpes as sexo, R.staptp";
+            $query .= " FROM AGPROGRAMA as AGP, PESSOA as P, R48PGMTRBDOC as R";
             $query .= " WHERE AGP.codpes = :codpes";
             $query .= " AND AGP.dtadfapgm IS NULL ";
             $query .= " AND AGP.dtaaprbantrb IS NOT NULL";
             $query .= " AND R.codare = AGP.codare";
             $query .= " AND R.codpes = :codpes";
             $query .= " AND R.numseqpgm = AGP.numseqpgm";
-            $query .= " AND VP.codpes = R.codpesdct";
-            $query .= " AND P.codpes = VP.codpes";
+            $query .= " AND P.codpes = R.codpesdct";
             $param = [
                 'codpes' => $aluno->codpes,
             ];
