@@ -92,7 +92,7 @@
                                 <div class="col-9 corpo">
                                     <p class="txt-nome-autor">{{$defesa->aluno->nome}}</p>
 
-                                    <p class="titulo-trabalho">{{$defesa->trabalho->titulo}}</p>
+                                    <p class="titulo-trabalho">{!!$defesa->trabalho->titulo!!}</p>
 
                                     <p class="txt-banca-titulo">Comissão julgadora</p>
 
