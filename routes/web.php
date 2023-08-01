@@ -26,6 +26,14 @@ Route::get('/', function () {
     return view('home');
 })->name("home");
 
+Route::get('/proximas-defesas', function () {
+    return view('propagation.defenses');
+})->name("proximas-defesas");
+
+Route::get('/proximos-eventos', function () {
+    return view('propagation.events');
+})->name("proximos-eventos");
+
 Route::get('/users/loginas', [UserController::class, 'loginas'])->name("users.loginas");
 Route::resource("users", UserController::class);
 
