@@ -241,6 +241,7 @@ class DefenseController extends Controller
         $siglas = [
             "Matemática Aplicada" => "MAP",
             "Estatística" => "MAE",
+            "Probabilidade e Estatística" => "MAE",
             "Ciência da Computação" => "MAC",
             "Mestrado Profissional em Ensino de Matemática" => "MPEM",
             "Bioinformática" => "BIOINFO",
