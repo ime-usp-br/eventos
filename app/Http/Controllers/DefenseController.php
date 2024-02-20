@@ -229,6 +229,7 @@ class DefenseController extends Controller
         $query .= " AND AGP.codare = A.codare";
         $query .= " AND AGP.dtadfapgm IS NULL ";
         $query .= " AND AGP.dtaaprbantrb IS NOT NULL";
+        $query .= " AND NC.dtafimcur IS NULL";
         $query .= " AND VP.codpes = AGP.codpes";
         $query .= " AND VP.sitatl = 'A'";
         $query .= " AND P.codpes = VP.codpes";
