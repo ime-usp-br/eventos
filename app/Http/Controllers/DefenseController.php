@@ -244,6 +244,7 @@ class DefenseController extends Controller
             "Probabilidade e Estatística" => "MAE",
             "Ciência da Computação" => "MAC",
             "Mestrado Profissional em Ensino de Matemática" => "MPEM",
+            "Ensino de Matemática" => "MPEM",
             "Bioinformática" => "BIOINFO",
             "Matemática" => "MAT",
         ];
